@@ -16,6 +16,7 @@ from typing import Iterable
 import pandas as pd
 import requests
 from sqlalchemy import select
+from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 
 from ..db import Match, Player, get_engine, init_db, session
 
@@ -118,30 +119,29 @@ def ingest_matches_year(tour: str, year: int, engine=None) -> int:
     for c in int_cols:
         df[c] = pd.to_numeric(df[c], errors="coerce").astype("Int64")
 
-    with session(engine) as s:
-        # naive bulk insert; UniqueConstraint dedupes via integrity error, so guard with a query.
-        existing_keys = set()
-        rows = s.execute(
-            select(Match.tour, Match.date, Match.winner_id, Match.loser_id, Match.tourney_name)
-            .where(Match.tour == tour, Match.date >= date(year, 1, 1), Match.date <= date(year, 12, 31))
-        ).all()
-        for row in rows:
-            existing_keys.add(tuple(row))
+    # In-batch dedup so we don't hit the unique constraint mid-flush
+    # (Sackmann CSVs occasionally include the same match twice).
+    seen = set()
+    deduped = []
+    for r in df.to_dict("records"):
+        key = (r["tour"], r["date"], r["winner_id"], r["loser_id"], r.get("tourney_name"))
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append({k: v for k, v in r.items() if v is not None or k in ("tourney_name",)})
 
-        records = df.to_dict("records")
-        seen = set(existing_keys)
-        new = []
-        for r in records:
-            key = (r["tour"], r["date"], r["winner_id"], r["loser_id"], r.get("tourney_name"))
-            if key in seen:
-                continue
-            seen.add(key)
-            new.append(r)
-        for r in new:
-            s.add(Match(**{k: v for k, v in r.items() if v is not None or k in ("tourney_name",)}))
+    if not deduped:
+        log.info("[%s %d] inserted 0 matches", tour, year)
+        return 0
+
+    # INSERT OR IGNORE handles cross-year duplicates (Brisbane etc.) without a pre-query.
+    stmt = sqlite_insert(Match).values(deduped).prefix_with("OR IGNORE")
+    with session(engine) as s:
+        result = s.execute(stmt)
         s.commit()
-    log.info("[%s %d] inserted %d matches", tour, year, len(new))
-    return len(new)
+    inserted = result.rowcount or 0
+    log.info("[%s %d] inserted %d matches", tour, year, inserted)
+    return inserted
 
 
 def ingest_all(tours: Iterable[str] = ("atp", "wta"), start_year: int = 2000, end_year: int | None = None) -> None:
