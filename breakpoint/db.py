@@ -69,6 +69,18 @@ class Rating(Base):
     matches_played = Column(Integer, default=0)
 
 
+class Ranking(Base):
+    """Weekly singles ranking snapshot. Source: Sackmann atp_rankings_*.csv / wta_rankings_*.csv."""
+    __tablename__ = "rankings"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    player_id = Column(Integer, ForeignKey("players.id"), index=True)
+    tour = Column(String, nullable=False, index=True)
+    date = Column(Date, nullable=False, index=True)
+    rank = Column(Integer)
+    points = Column(Integer)
+    __table_args__ = (UniqueConstraint("player_id", "date", name="uq_ranking_pid_date"),)
+
+
 class Fixture(Base):
     """Upcoming match — pulled from Sofascore, enriched with odds, fed to the model."""
     __tablename__ = "fixtures"

@@ -21,6 +21,11 @@ from sklearn.metrics import brier_score_loss, log_loss, roc_auc_score
 FEATURES = [
     "elo_diff", "elo_surf_diff", "form10_diff", "surf_form_diff",
     "rest_diff", "h2h_diff", "matches_played_diff",
+    "serve_pts_won_diff", "return_pts_won_diff",
+    "surf_serve_diff", "surf_return_diff",
+    "bp_save_pct_diff", "bp_convert_pct_diff",
+    "ace_rate_diff", "df_rate_diff",
+    "height_diff_cm", "rank_traj_diff",
 ]
 MODEL_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "models"
 

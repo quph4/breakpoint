@@ -18,7 +18,7 @@ import requests
 from sqlalchemy import select
 from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 
-from ..db import Match, Player, get_engine, init_db, session
+from ..db import Match, Player, Ranking, get_engine, init_db, session
 
 log = logging.getLogger(__name__)
 
@@ -147,6 +147,54 @@ def ingest_matches_year(tour: str, year: int, engine=None) -> int:
     return inserted
 
 
+RANKING_FILES = {
+    "atp": [
+        f"{ATP_BASE}/atp_rankings_00s.csv",
+        f"{ATP_BASE}/atp_rankings_10s.csv",
+        f"{ATP_BASE}/atp_rankings_20s.csv",
+        f"{ATP_BASE}/atp_rankings_current.csv",
+    ],
+    "wta": [
+        f"{WTA_BASE}/wta_rankings_00s.csv",
+        f"{WTA_BASE}/wta_rankings_10s.csv",
+        f"{WTA_BASE}/wta_rankings_20s.csv",
+        f"{WTA_BASE}/wta_rankings_current.csv",
+    ],
+}
+
+
+def ingest_rankings(tour: str, since: date | None = None, engine=None) -> int:
+    engine = engine or init_db()
+    offset = _offset_for(tour)
+    since = since or date(2010, 1, 1)
+    total = 0
+    for url in RANKING_FILES[tour]:
+        try:
+            df = _fetch_csv(url)
+        except requests.HTTPError as e:
+            log.warning("rankings file missing: %s (%s)", url, e)
+            continue
+        df["date"] = df["ranking_date"].apply(_parse_date)
+        df = df.dropna(subset=["date", "player", "rank"])
+        df = df[df["date"] >= since]
+        df["player_id"] = df["player"].astype(int) + offset
+        df["tour"] = tour
+        df["rank"] = pd.to_numeric(df["rank"], errors="coerce").astype("Int64")
+        df["points"] = pd.to_numeric(df.get("points"), errors="coerce").astype("Int64") if "points" in df.columns else None
+        records = df[["player_id", "tour", "date", "rank", "points"]].to_dict("records")
+        records = [{k: (None if pd.isna(v) else v) for k, v in r.items()} for r in records]
+        if not records:
+            continue
+        from sqlalchemy.dialects.sqlite import insert as sqlite_insert
+        stmt = sqlite_insert(Ranking).values(records).prefix_with("OR IGNORE")
+        with session(engine) as s:
+            result = s.execute(stmt)
+            s.commit()
+        total += result.rowcount or 0
+    log.info("[%s rankings] inserted %d rows", tour, total)
+    return total
+
+
 def ingest_all(tours: Iterable[str] = ("atp", "wta"), start_year: int = 2000, end_year: int | None = None) -> None:
     end_year = end_year or date.today().year
     engine = init_db()
@@ -154,3 +202,4 @@ def ingest_all(tours: Iterable[str] = ("atp", "wta"), start_year: int = 2000, en
         ingest_players(tour, engine)
         for year in range(start_year, end_year + 1):
             ingest_matches_year(tour, year, engine)
+        ingest_rankings(tour, since=date(start_year, 1, 1), engine=engine)
