@@ -118,10 +118,14 @@ def ingest_matches_year(tour: str, year: int, engine=None) -> int:
             existing_keys.add(tuple(row))
 
         records = df.to_dict("records")
-        new = [
-            r for r in records
-            if (r["tour"], r["date"], r["winner_id"], r["loser_id"], r.get("tourney_name")) not in existing_keys
-        ]
+        seen = set(existing_keys)
+        new = []
+        for r in records:
+            key = (r["tour"], r["date"], r["winner_id"], r["loser_id"], r.get("tourney_name"))
+            if key in seen:
+                continue
+            seen.add(key)
+            new.append(r)
         for r in new:
             s.add(Match(**{k: v for k, v in r.items() if v is not None or k in ("tourney_name",)}))
         s.commit()
