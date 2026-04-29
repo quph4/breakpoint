@@ -34,8 +34,9 @@ jobs:
       - name: Install package
         run: pip install -e .
 
-      - name: Cache DB between runs
-        uses: actions/cache@v4
+      - name: Restore DB cache
+        id: restore-db
+        uses: actions/cache/restore@v4
         with:
           path: data/breakpoint.db
           key: bot-db-${{ github.run_id }}
@@ -74,11 +75,22 @@ jobs:
         run: breakpoint predict
         continue-on-error: true
 
+      - name: Void duplicate bets
+        run: breakpoint void-duplicates
+        continue-on-error: true
+
       - name: Settle open bets
         run: breakpoint settle
 
       - name: Export JSON for dashboard
         run: breakpoint export
+
+      - name: Save DB cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/breakpoint.db
+          key: bot-db-${{ github.run_id }}
 
       - name: Commit dashboard data
         id: commit

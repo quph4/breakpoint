@@ -10,7 +10,7 @@ import json
 from dataclasses import dataclass
 from datetime import date, datetime
 
-from sqlalchemy import select
+from sqlalchemy import and_, or_, select
 
 from ..db import Bet, Match, Player, Prediction, init_db, session
 
@@ -79,6 +79,24 @@ def place_bet_from_prediction(pred: Prediction, engine=None,
         return None
 
     with session(engine) as s:
+        # Idempotency: refuse to place a second bet on the same matchup
+        # (same date, same pair) regardless of which fixture row drove it
+        # or which side we previously picked. Guards against The Odds API
+        # listing the same match under multiple event_ids and against
+        # cache-loss replays after a failed run.
+        dup = s.scalar(
+            select(Bet).where(
+                Bet.match_date == pred.match_date,
+                Bet.status == "open",
+                or_(
+                    and_(Bet.pick_player_id == pick_id, Bet.opponent_id == opp_id),
+                    and_(Bet.pick_player_id == opp_id, Bet.opponent_id == pick_id),
+                ),
+            )
+        )
+        if dup:
+            return None
+
         bet = Bet(
             prediction_id=pred.id, match_date=pred.match_date,
             pick_player_id=pick_id, opponent_id=opp_id,
@@ -88,6 +106,32 @@ def place_bet_from_prediction(pred: Prediction, engine=None,
         )
         s.add(bet); s.commit()
     return PlacedBet(pick_id, opp_id, stake, odds, edge, p)
+
+
+def void_duplicate_bets(engine=None) -> int:
+    """Group open bets by (date, unordered pair). For any group with more than
+    one bet, keep the oldest and void the rest (status=void, pnl=0). Voided
+    bets release their stake back to bankroll automatically because
+    current_bankroll only deducts stakes from `status=open` rows.
+    """
+    engine = engine or init_db()
+    voided = 0
+    groups: dict[tuple, list[Bet]] = {}
+    with session(engine) as s:
+        opens = list(s.scalars(select(Bet).where(Bet.status == "open").order_by(Bet.placed_at)))
+        for b in opens:
+            key = (b.match_date, frozenset({b.pick_player_id, b.opponent_id}))
+            groups.setdefault(key, []).append(b)
+        for bets in groups.values():
+            if len(bets) <= 1:
+                continue
+            for dup in bets[1:]:
+                dup.status = "void"
+                dup.pnl = 0
+                dup.settled_at = datetime.utcnow()
+                voided += 1
+        s.commit()
+    return voided
 
 
 def settle_bets(engine=None) -> int:

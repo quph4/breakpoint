@@ -92,6 +92,14 @@ def settle():
     click.echo(f"Settled {n} bets.")
 
 
+@cli.command("void-duplicates")
+def void_duplicates_cmd():
+    """Void any duplicate open bets on the same matchup, keeping the oldest."""
+    from .betting.ledger import void_duplicate_bets
+    n = void_duplicate_bets()
+    click.echo(f"Voided {n} duplicate bets.")
+
+
 @cli.command()
 def audit():
     """Build calibration audit JSON from the latest test split."""
