@@ -123,9 +123,19 @@ def export_pnl_curve(engine=None) -> None:
     _write("pnl_curve.json", points)
 
 
+def export_audit() -> None:
+    from .audit import compute_audit
+    try:
+        report = compute_audit()
+    except FileNotFoundError:
+        return
+    _write("audit.json", report)
+
+
 def export_all(engine=None) -> None:
     engine = engine or init_db()
     export_summary(engine)
     export_bets(engine)
     export_players(engine)
     export_pnl_curve(engine)
+    export_audit()

@@ -2,6 +2,7 @@ import { Link, NavLink, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Bets from "./pages/Bets";
 import Players from "./pages/Players";
+import Model from "./pages/Model";
 import About from "./pages/About";
 
 const navClass = ({ isActive }: { isActive: boolean }) =>
@@ -21,6 +22,7 @@ export default function App() {
             <NavLink to="/" end className={navClass}>Home</NavLink>
             <NavLink to="/bets" className={navClass}>Bets</NavLink>
             <NavLink to="/players" className={navClass}>Players</NavLink>
+            <NavLink to="/model" className={navClass}>Model</NavLink>
             <NavLink to="/about" className={navClass}>About</NavLink>
           </nav>
         </div>
@@ -31,6 +33,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/bets" element={<Bets />} />
           <Route path="/players" element={<Players />} />
+          <Route path="/model" element={<Model />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </main>

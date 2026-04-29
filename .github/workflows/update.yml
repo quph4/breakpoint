@@ -52,6 +52,10 @@ jobs:
       - name: Train model
         run: breakpoint train --min-year 2015
 
+      - name: Calibration audit
+        run: breakpoint audit
+        continue-on-error: true
+
       - name: Sync fixtures + odds (The Odds API)
         env:
           BREAKPOINT_ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}

@@ -93,6 +93,19 @@ def settle():
 
 
 @cli.command()
+def audit():
+    """Build calibration audit JSON from the latest test split."""
+    from .audit import write_audit
+    r = write_audit()
+    click.echo(
+        f"n_test={r['n_test']} | "
+        f"AUC={r['overall']['calibrated']['auc']:.4f} | "
+        f"Brier={r['overall']['calibrated']['brier']:.4f} | "
+        f"bias_gap={r['bias']['weighted_gap']:+.4f} ({r['bias']['interpretation']})"
+    )
+
+
+@cli.command()
 def export():
     """Write JSON snapshots into dashboard/public/data/."""
     from .export import export_all

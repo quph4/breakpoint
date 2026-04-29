@@ -66,6 +66,13 @@ def train(df: pd.DataFrame, version: str | None = None) -> TrainReport:
     raw_test = booster.predict_proba(X_test)[:, 1]
     cal_test = iso.predict(raw_test)
 
+    # Persist held-out predictions for calibration audit
+    test_export = test_df.assign(
+        raw_prob=raw_test, cal_prob=cal_test
+    )[["date", "tour", "surface", "label", "raw_prob", "cal_prob"]]
+    test_export["date"] = test_export["date"].astype(str)
+    test_export.to_json(MODEL_DIR / "test_predictions.json", orient="records")
+
     report = TrainReport(
         version=version,
         rows_train=len(train_df),

@@ -69,3 +69,27 @@ export const fetchOpenBets = () => getJson<Bet[]>("open_bets.json", []);
 export const fetchSettledBets = () => getJson<Bet[]>("settled_bets.json", []);
 export const fetchPlayers = () => getJson<Player[]>("players.json", []);
 export const fetchPnlCurve = () => getJson<PnlPoint[]>("pnl_curve.json", []);
+
+export type Audit = {
+  n_test: number;
+  date_min: string;
+  date_max: string;
+  overall: {
+    raw: SliceMetrics;
+    calibrated: SliceMetrics;
+  };
+  reliability_calibrated: ReliabilityBucket[];
+  reliability_raw: ReliabilityBucket[];
+  by_surface: Record<string, SliceMetrics>;
+  by_tour: Record<string, SliceMetrics>;
+  confidence_histogram: ConfBucket[];
+  bias: { weighted_gap: number; interpretation: string };
+};
+export type SliceMetrics = { n: number; auc: number | null; log_loss: number | null; brier: number | null };
+export type ReliabilityBucket = {
+  bucket_lo: number; bucket_hi: number; n: number;
+  mean_predicted: number | null; actual_rate: number | null;
+};
+export type ConfBucket = { lo: number; hi: number; n: number; fraction: number };
+
+export const fetchAudit = () => getJson<Audit | null>("audit.json", null);
