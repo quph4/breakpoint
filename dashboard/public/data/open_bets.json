@@ -13,7 +13,8 @@
     "model_p": 0.9439024390243902,
     "edge": 0.5291219512195122,
     "status": "open",
-    "pnl": null
+    "pnl": null,
+    "rationale": []
   },
   {
     "id": 2,
@@ -29,7 +30,8 @@
     "model_p": 0.9439024390243902,
     "edge": 0.5291219512195122,
     "status": "open",
-    "pnl": null
+    "pnl": null,
+    "rationale": []
   },
   {
     "id": 1,
@@ -45,6 +47,7 @@
     "model_p": 0.9439024390243902,
     "edge": 0.5291219512195122,
     "status": "open",
-    "pnl": null
+    "pnl": null,
+    "rationale": []
   }
 ]
