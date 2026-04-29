@@ -1,11 +1,17 @@
-"""The Odds API client. Fetches H2H tennis odds and attaches them to Fixtures.
+"""The Odds API client. Single source of truth for both fixtures and odds.
 
-Free tier: 500 requests/month. We respect that ruthlessly:
-  - Discover active tennis sport keys once per run.
-  - For each active key, one /odds call covers all matches.
-  - Skip if `BREAKPOINT_ODDS_API_KEY` env var is missing — bot still runs,
-    just without live odds, no bets get placed.
-  - Cache responses for 30 minutes on disk.
+The /odds endpoint returns matchups (home_team, away_team, commence_time)
+alongside bookmaker prices, so we use it for both. Sofascore would have been
+nice for richer surface metadata, but GitHub Actions runner IPs get 403'd.
+
+Free tier: 500 requests/month. We respect that:
+  - One /sports call to discover active tennis keys.
+  - One /odds call per active key (typically 2-4 active at once).
+  - 30-min disk cache.
+  - No-op if BREAKPOINT_ODDS_API_KEY missing.
+
+Surface is derived from sport_key heuristics (madrid_open → Clay etc.)
+because the API doesn't expose it directly.
 """
 from __future__ import annotations
 
@@ -16,7 +22,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import requests
-from sqlalchemy import select, update
+from sqlalchemy import select
+from sqlalchemy.dialects.sqlite import insert as sqlite_insert
 
 from ..db import Fixture, init_db, session
 from ..name_resolver import resolve
@@ -27,12 +34,54 @@ API_BASE = "https://api.the-odds-api.com/v4"
 CACHE_DIR = Path(__file__).resolve().parent.parent.parent / "data" / "odds_cache"
 CACHE_TTL_MIN = 30
 
+# sport_key fragment → (surface, tour_hint)
+# Order matters: more specific patterns first.
+_SURFACE_HINTS: list[tuple[str, str]] = [
+    ("french_open", "Clay"),
+    ("roland_garros", "Clay"),
+    ("madrid_open", "Clay"),
+    ("italian_open", "Clay"),
+    ("monte_carlo", "Clay"),
+    ("rome", "Clay"),
+    ("hamburg", "Clay"),
+    ("barcelona", "Clay"),
+    ("wimbledon", "Grass"),
+    ("queens", "Grass"),
+    ("halle", "Grass"),
+    ("eastbourne", "Grass"),
+    ("us_open", "Hard"),
+    ("australian_open", "Hard"),
+    ("aus_open", "Hard"),
+    ("indian_wells", "Hard"),
+    ("miami_open", "Hard"),
+    ("cincinnati", "Hard"),
+    ("canadian_open", "Hard"),
+]
+
+
+def _surface_for(sport_key: str, title: str = "") -> str | None:
+    needle = (sport_key + " " + title).lower()
+    for frag, surf in _SURFACE_HINTS:
+        if frag in needle:
+            return surf
+    if "clay" in needle:
+        return "Clay"
+    if "grass" in needle:
+        return "Grass"
+    if "hard" in needle or "indoor" in needle:
+        return "Hard"
+    return None
+
+
+def _tour_for(sport_key: str) -> str:
+    return "wta" if "wta" in sport_key.lower() else "atp"
+
 
 def _api_key() -> str | None:
     return os.environ.get("BREAKPOINT_ODDS_API_KEY")
 
 
-def _cache_get(name: str) -> list | dict | None:
+def _cache_get(name: str):
     p = CACHE_DIR / f"{name}.json"
     if not p.exists():
         return None
@@ -48,11 +97,12 @@ def _cache_get(name: str) -> list | dict | None:
 
 def _cache_put(name: str, data) -> None:
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    p = CACHE_DIR / f"{name}.json"
-    p.write_text(json.dumps({"ts": datetime.utcnow().isoformat(), "data": data}))
+    (CACHE_DIR / f"{name}.json").write_text(
+        json.dumps({"ts": datetime.utcnow().isoformat(), "data": data})
+    )
 
 
-def _get(path: str, params: dict, cache_key: str | None = None) -> list | dict | None:
+def _get(path: str, params: dict, cache_key: str | None = None):
     if cache_key:
         cached = _cache_get(cache_key)
         if cached is not None:
@@ -63,16 +113,15 @@ def _get(path: str, params: dict, cache_key: str | None = None) -> list | dict |
     if not key:
         log.warning("BREAKPOINT_ODDS_API_KEY not set; skipping live odds")
         return None
-    params = {**params, "apiKey": key}
     try:
-        r = requests.get(f"{API_BASE}{path}", params=params, timeout=20)
+        r = requests.get(f"{API_BASE}{path}", params={**params, "apiKey": key}, timeout=20)
     except requests.RequestException as e:
         log.warning("odds-api request failed: %s", e)
         return None
 
-    remaining = r.headers.get("x-requests-remaining")
-    used = r.headers.get("x-requests-used")
-    log.info("odds-api %s status=%s remaining=%s used=%s", path, r.status_code, remaining, used)
+    log.info("odds-api %s status=%s remaining=%s used=%s",
+             path, r.status_code,
+             r.headers.get("x-requests-remaining"), r.headers.get("x-requests-used"))
 
     if r.status_code != 200:
         log.warning("odds-api error: %s %s", r.status_code, r.text[:200])
@@ -84,27 +133,14 @@ def _get(path: str, params: dict, cache_key: str | None = None) -> list | dict |
     return data
 
 
-def active_tennis_sports() -> list[str]:
+def active_tennis_sports() -> list[dict]:
     sports = _get("/sports", {"all": "false"}, cache_key="sports")
     if not sports:
         return []
-    keys = [s["key"] for s in sports if s.get("group", "").lower() == "tennis" and s.get("active")]
-    log.info("active tennis sports: %s", keys)
-    return keys
-
-
-def fetch_odds_for_sport(sport_key: str) -> list[dict]:
-    data = _get(f"/sports/{sport_key}/odds", {
-        "regions": "eu",
-        "markets": "h2h",
-        "oddsFormat": "decimal",
-        "dateFormat": "iso",
-    }, cache_key=f"odds_{sport_key}")
-    return data or []
+    return [s for s in sports if s.get("group", "").lower() == "tennis" and s.get("active")]
 
 
 def _best_h2h_price(event: dict, player_name: str) -> tuple[float | None, str | None]:
-    """Pick the best (highest) decimal price across bookmakers for a side."""
     best, best_book = None, None
     for bm in event.get("bookmakers", []):
         for m in bm.get("markets", []):
@@ -118,62 +154,117 @@ def _best_h2h_price(event: dict, player_name: str) -> tuple[float | None, str | 
     return best, best_book
 
 
-def attach_odds_to_fixtures(engine=None) -> int:
+def sync_fixtures_and_odds(engine=None) -> dict:
+    """Pull active tennis events + prices from The Odds API and upsert as Fixtures."""
     engine = engine or init_db()
     if not _api_key():
-        log.warning("no API key — skipping odds attach")
-        return 0
+        log.warning("no API key — skipping")
+        return {"events_seen": 0, "fixtures_upserted": 0, "priced": 0, "unresolved": 0}
 
     sports = active_tennis_sports()
-    if not sports:
-        return 0
+    log.info("active tennis sports: %s", [s["key"] for s in sports])
 
-    matched = 0
+    events_seen = priced = unresolved = 0
+    rows: list[dict] = []
+    price_updates: list[dict] = []
+
+    for sport in sports:
+        sport_key = sport["key"]
+        title = sport.get("title", "")
+        surface = _surface_for(sport_key, title)
+        tour = _tour_for(sport_key)
+
+        for event in _get(f"/sports/{sport_key}/odds", {
+            "regions": "eu",
+            "markets": "h2h",
+            "oddsFormat": "decimal",
+            "dateFormat": "iso",
+        }, cache_key=f"odds_{sport_key}") or []:
+            events_seen += 1
+            home, away = event.get("home_team"), event.get("away_team")
+            if not home or not away:
+                continue
+
+            commence = event.get("commence_time")
+            start_dt = datetime.fromisoformat(commence.replace("Z", "+00:00")) if commence else None
+            start_naive = start_dt.replace(tzinfo=None) if start_dt else None
+            match_date = start_dt.date() if start_dt else None
+
+            a_id = resolve(home, tour)
+            b_id = resolve(away, tour)
+            if not a_id or not b_id:
+                unresolved += 1
+                log.info("unresolved: %s vs %s (sport=%s)", home, away, sport_key)
+
+            price_a, book_a = _best_h2h_price(event, home)
+            price_b, book_b = _best_h2h_price(event, away)
+            if price_a and price_b:
+                priced += 1
+
+            rows.append({
+                "source": "odds_api",
+                "source_id": event["id"],
+                "tour": tour,
+                "date": match_date,
+                "start_ts": start_naive,
+                "tourney_name": title,
+                "round": None,
+                "surface": surface,
+                "indoor": 0,
+                "player_a_name": home,
+                "player_b_name": away,
+                "player_a_id": a_id,
+                "player_b_id": b_id,
+                "odds_a": price_a,
+                "odds_b": price_b,
+                "odds_book": book_a or book_b,
+                "odds_fetched_at": datetime.utcnow() if (price_a and price_b) else None,
+                "status": "scheduled",
+            })
+
+    if not rows:
+        log.info("no events returned")
+        return {"events_seen": 0, "fixtures_upserted": 0, "priced": 0, "unresolved": 0}
+
+    # Upsert: insert new, update prices on existing ones (status not yet finalized).
+    inserted = 0
     with session(engine) as s:
-        # Build a map of fixtures we'd like to price: scheduled, future, with both player_ids resolved.
-        from datetime import date as _date
-        future_q = select(Fixture).where(
-            Fixture.status == "scheduled",
-            Fixture.date >= _date.today(),
-            Fixture.player_a_id.is_not(None),
-            Fixture.player_b_id.is_not(None),
-        )
-        fixtures = list(s.scalars(future_q))
-        log.info("priceable fixtures: %d", len(fixtures))
+        # Insert-or-ignore for new rows
+        ins = sqlite_insert(Fixture).values(rows).prefix_with("OR IGNORE")
+        result = s.execute(ins)
+        inserted = result.rowcount or 0
 
-        # Index fixtures by (player_a_id, player_b_id) and sorted variant
-        fix_index: dict[tuple[int, int], Fixture] = {}
-        for f in fixtures:
-            fix_index[(f.player_a_id, f.player_b_id)] = f
-            fix_index[(f.player_b_id, f.player_a_id)] = f
-
-        for sport_key in sports:
-            tour = "wta" if "wta" in sport_key.lower() else "atp"
-            for event in fetch_odds_for_sport(sport_key):
-                home = event.get("home_team")
-                away = event.get("away_team")
-                if not home or not away:
-                    continue
-                a_id = resolve(home, tour)
-                b_id = resolve(away, tour)
-                if not a_id or not b_id:
-                    continue
-                fx = fix_index.get((a_id, b_id))
-                if not fx:
-                    continue
-                price_a, book_a = _best_h2h_price(event, home)
-                price_b, book_b = _best_h2h_price(event, away)
-                if not price_a or not price_b:
-                    continue
-                # Align odds with the fixture's stored player order
-                if (fx.player_a_id, fx.player_b_id) == (a_id, b_id):
-                    fx.odds_a, fx.odds_b = price_a, price_b
-                else:
-                    fx.odds_a, fx.odds_b = price_b, price_a
-                fx.odds_book = book_a or book_b
-                fx.odds_fetched_at = datetime.utcnow()
-                matched += 1
+        # For existing rows, refresh prices + resolved IDs (in case re-resolved)
+        for r in rows:
+            existing = s.scalar(
+                select(Fixture).where(
+                    Fixture.source == r["source"], Fixture.source_id == r["source_id"]
+                )
+            )
+            if existing and existing.status == "scheduled":
+                if r["odds_a"] and r["odds_b"]:
+                    existing.odds_a = r["odds_a"]
+                    existing.odds_b = r["odds_b"]
+                    existing.odds_book = r["odds_book"]
+                    existing.odds_fetched_at = r["odds_fetched_at"]
+                if r["player_a_id"] and not existing.player_a_id:
+                    existing.player_a_id = r["player_a_id"]
+                if r["player_b_id"] and not existing.player_b_id:
+                    existing.player_b_id = r["player_b_id"]
+                if r["surface"] and not existing.surface:
+                    existing.surface = r["surface"]
         s.commit()
 
-    log.info("attached odds to %d fixtures", matched)
-    return matched
+    log.info("events=%d upserted=%d priced=%d unresolved=%d",
+             events_seen, inserted, priced, unresolved)
+    return {
+        "events_seen": events_seen,
+        "fixtures_upserted": inserted,
+        "priced": priced,
+        "unresolved": unresolved,
+    }
+
+
+# Back-compat shim for the old workflow call
+def attach_odds_to_fixtures(engine=None) -> int:
+    return sync_fixtures_and_odds(engine)["priced"]
