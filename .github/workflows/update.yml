@@ -82,7 +82,13 @@ jobs:
             echo "changed=false" >> $GITHUB_OUTPUT
           else
             git commit -m "data: scheduled update $(date -u +%Y-%m-%dT%H:%MZ)"
-            git push
+            # Rebase onto any remote changes that landed during this run, then push.
+            # Retry up to 3 times in case another run lands between pull and push.
+            for i in 1 2 3; do
+              git pull --rebase origin main && git push && break
+              echo "push attempt $i failed, retrying"
+              sleep 5
+            done
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
