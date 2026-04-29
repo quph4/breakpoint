@@ -34,8 +34,14 @@ def _normalize(name: str) -> str:
     return " ".join(name.lower().replace(".", " ").replace(",", " ").split())
 
 
+@lru_cache(maxsize=20000)
 def resolve(name: str, tour: str | None = None, min_score: int = 88) -> int | None:
-    """Best-effort player_id for a display name. Returns None on no confident match."""
+    """Best-effort player_id for a display name. Returns None on no confident match.
+
+    Cached because tennis-data.co.uk and Sofascore both hit the same names
+    repeatedly across files; rapidfuzz against ~5000 candidates is cheap but
+    not free, and resolution-by-name is now on the hot path of every ingest.
+    """
     if not name:
         return None
     candidates = _player_index(tour)
@@ -63,3 +69,4 @@ def resolve(name: str, tour: str | None = None, min_score: int = 88) -> int | No
 
 def reset_cache() -> None:
     _player_index.cache_clear()
+    resolve.cache_clear()
