@@ -105,22 +105,42 @@ jobs:
       - name: Commit dashboard data
         id: commit
         run: |
+          set -e
           git config user.name "breakpoint-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add dashboard/public/data
-          if git diff --cached --quiet; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-          else
+
+          commit_data() {
+            git add dashboard/public/data
+            if git diff --cached --quiet; then return 1; fi
             git commit -m "data: scheduled update $(date -u +%Y-%m-%dT%H:%MZ)"
-            # Rebase onto any remote changes that landed during this run, then push.
-            # Retry up to 3 times in case another run lands between pull and push.
-            for i in 1 2 3; do
-              git pull --rebase origin main && git push && break
-              echo "push attempt $i failed, retrying"
-              sleep 5
-            done
-            echo "changed=true" >> $GITHUB_OUTPUT
+          }
+
+          if ! commit_data; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            exit 0
           fi
+
+          # Push, regenerating JSON over latest remote on every conflict.
+          # Data files are 100% generated from data/breakpoint.db so a pull
+          # followed by `breakpoint export` always produces the freshest copy
+          # without any merge work.
+          for i in 1 2 3; do
+            if git push origin main; then
+              echo "changed=true" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+            echo "push attempt $i failed, regenerating over origin/main"
+            git reset --hard HEAD~1
+            git fetch origin main
+            git reset --hard origin/main
+            breakpoint export
+            commit_data || { echo "no diff after regenerate, done"; echo "changed=false" >> $GITHUB_OUTPUT; exit 0; }
+            sleep 3
+          done
+
+          echo "all push attempts exhausted"
+          echo "changed=false" >> $GITHUB_OUTPUT
+          exit 1
 
   deploy:
     needs: update
