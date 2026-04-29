@@ -52,6 +52,20 @@ jobs:
       - name: Train model
         run: breakpoint train --min-year 2015
 
+      - name: Fetch upcoming fixtures (Sofascore)
+        run: breakpoint fetch-fixtures --days 5
+        continue-on-error: true
+
+      - name: Fetch live odds (The Odds API)
+        env:
+          BREAKPOINT_ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: breakpoint fetch-odds
+        continue-on-error: true
+
+      - name: Predict + place fake bets
+        run: breakpoint predict
+        continue-on-error: true
+
       - name: Settle open bets
         run: breakpoint settle
 

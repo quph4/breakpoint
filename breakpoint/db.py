@@ -69,6 +69,33 @@ class Rating(Base):
     matches_played = Column(Integer, default=0)
 
 
+class Fixture(Base):
+    """Upcoming match — pulled from Sofascore, enriched with odds, fed to the model."""
+    __tablename__ = "fixtures"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    source = Column(String, nullable=False)  # 'sofascore'
+    source_id = Column(String, nullable=False, index=True)
+    tour = Column(String)  # 'atp' | 'wta' | None when ambiguous
+    date = Column(Date, index=True)
+    start_ts = Column(DateTime)
+    tourney_name = Column(String)
+    round = Column(String)
+    surface = Column(String)
+    indoor = Column(Integer)  # 0/1
+    player_a_name = Column(String, nullable=False)
+    player_b_name = Column(String, nullable=False)
+    player_a_id = Column(Integer, ForeignKey("players.id"))  # resolved
+    player_b_id = Column(Integer, ForeignKey("players.id"))
+    odds_a = Column(Float)
+    odds_b = Column(Float)
+    odds_book = Column(String)  # which book the odds came from
+    odds_fetched_at = Column(DateTime)
+    status = Column(String, default="scheduled", index=True)  # scheduled | predicted | bet_placed | finished | skipped
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    __table_args__ = (UniqueConstraint("source", "source_id", name="uq_fixture_source"),)
+
+
 class Odds(Base):
     """Closing odds joined from tennis-data.co.uk. Decimal format."""
     __tablename__ = "odds"

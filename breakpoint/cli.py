@@ -63,6 +63,31 @@ def train(tour: str | None, min_year: int):
     )
 
 
+@cli.command("fetch-fixtures")
+@click.option("--days", type=int, default=5, help="Days ahead to fetch")
+def fetch_fixtures_cmd(days: int):
+    """Pull upcoming tennis fixtures from Sofascore."""
+    from .ingest.sofascore import ingest_window
+    n = ingest_window(days=days)
+    click.echo(f"Inserted {n} fixtures.")
+
+
+@cli.command("fetch-odds")
+def fetch_odds_cmd():
+    """Attach odds from The Odds API to scheduled fixtures."""
+    from .ingest.odds_api import attach_odds_to_fixtures
+    n = attach_odds_to_fixtures()
+    click.echo(f"Priced {n} fixtures.")
+
+
+@cli.command("predict")
+def predict_cmd():
+    """Predict + place bets on priced fixtures."""
+    from .predict import run
+    r = run()
+    click.echo(f"Predictions: {r['predictions']} | Bets placed: {r['bets']} | Skipped: {r['skipped']}")
+
+
 @cli.command()
 def settle():
     """Settle open bets against historical results."""
