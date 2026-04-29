@@ -29,6 +29,15 @@ PLAYER_FILES = {
     "wta": f"{WTA_BASE}/wta_players.csv",
 }
 
+# Sackmann's ATP and WTA player IDs both start from low integers and overlap.
+# We namespace WTA by adding this offset to every WTA player_id everywhere
+# (player table + match winner/loser columns).
+WTA_ID_OFFSET = 10_000_000
+
+
+def _offset_for(tour: str) -> int:
+    return WTA_ID_OFFSET if tour == "wta" else 0
+
 def matches_url(tour: str, year: int) -> str:
     base = ATP_BASE if tour == "atp" else WTA_BASE
     return f"{base}/{tour}_matches_{year}.csv"
@@ -63,10 +72,11 @@ def ingest_players(tour: str, engine=None) -> int:
     cols = ["player_id", "name", "tour", "country", "hand", "height_cm", "dob"]
     df = df[cols].rename(columns={"player_id": "id"})
     df = df.dropna(subset=["id", "name"])
-    df["id"] = df["id"].astype(int)
+    df["id"] = df["id"].astype(int) + _offset_for(tour)
+    df = df.drop_duplicates(subset=["id"], keep="first")
 
     with session(engine) as s:
-        existing = {p for (p,) in s.execute(select(Player.id).where(Player.tour == tour))}
+        existing = {p for (p,) in s.execute(select(Player.id))}
         new_rows = df[~df["id"].isin(existing)].to_dict("records")
         for row in new_rows:
             s.add(Player(**row))
@@ -96,8 +106,9 @@ def ingest_matches_year(tour: str, year: int, engine=None) -> int:
 
     df["date"] = df["tourney_date"].apply(_parse_date)
     df = df.dropna(subset=["date", "winner_id", "loser_id"])
-    df["winner_id"] = df["winner_id"].astype(int)
-    df["loser_id"] = df["loser_id"].astype(int)
+    offset = _offset_for(tour)
+    df["winner_id"] = df["winner_id"].astype(int) + offset
+    df["loser_id"] = df["loser_id"].astype(int) + offset
     df["tour"] = tour
 
     keep = ["tour", "date"] + [c for c in _MATCH_COLS if c in df.columns and c != "tourney_date"]
