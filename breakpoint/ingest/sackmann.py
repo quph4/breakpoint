@@ -119,6 +119,9 @@ def ingest_matches_year(tour: str, year: int, engine=None) -> int:
     for c in int_cols:
         df[c] = pd.to_numeric(df[c], errors="coerce").astype("Int64")
 
+    # Cast Int64 NaN → None so SQLite inserts NULL.
+    df = df.where(pd.notnull(df), None)
+
     # In-batch dedup so we don't hit the unique constraint mid-flush
     # (Sackmann CSVs occasionally include the same match twice).
     seen = set()
@@ -128,7 +131,7 @@ def ingest_matches_year(tour: str, year: int, engine=None) -> int:
         if key in seen:
             continue
         seen.add(key)
-        deduped.append({k: v for k, v in r.items() if v is not None or k in ("tourney_name",)})
+        deduped.append(r)
 
     if not deduped:
         log.info("[%s %d] inserted 0 matches", tour, year)
