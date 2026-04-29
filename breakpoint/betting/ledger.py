@@ -6,6 +6,7 @@ when edge exceeds MIN_EDGE; tennis markets are tight so 3% is the floor.
 """
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass
 from datetime import date, datetime
 
@@ -55,7 +56,8 @@ class PlacedBet:
     model_p: float
 
 
-def place_bet_from_prediction(pred: Prediction, engine=None) -> PlacedBet | None:
+def place_bet_from_prediction(pred: Prediction, engine=None,
+                              rationale: list[str] | None = None) -> PlacedBet | None:
     """Picks the side with higher edge; skips if no side meets MIN_EDGE."""
     engine = engine or init_db()
     bankroll = current_bankroll(engine)
@@ -82,6 +84,7 @@ def place_bet_from_prediction(pred: Prediction, engine=None) -> PlacedBet | None
             pick_player_id=pick_id, opponent_id=opp_id,
             surface=pred.surface, tourney_name=pred.tourney_name,
             stake=stake, odds=odds, model_p=p, edge=edge, status="open",
+            rationale=json.dumps(rationale) if rationale else None,
         )
         s.add(bet); s.commit()
     return PlacedBet(pick_id, opp_id, stake, odds, edge, p)

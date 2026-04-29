@@ -7,6 +7,7 @@ from datetime import date, datetime
 from sqlalchemy import select
 
 from .betting.ledger import place_bet_from_prediction
+from .betting.rationale import make_rationale
 from .db import Fixture, Prediction, init_db, session
 from .features.live import build_live_row
 from .models.baseline import load_latest, predict_proba
@@ -27,6 +28,7 @@ def run(engine=None) -> dict:
 
     # Phase 1: write all predictions in one transaction.
     pred_ids: list[tuple[int, int]] = []  # (prediction_id, fixture_id)
+    features_by_pred: dict[int, dict] = {}
     with session(engine) as s:
         fixtures = list(s.scalars(
             select(Fixture).where(
@@ -66,6 +68,7 @@ def run(engine=None) -> dict:
             s.add(pred)
             s.flush()
             pred_ids.append((pred.id, fx.id))
+            features_by_pred[pred.id] = row.iloc[0].to_dict()
             n_pred += 1
         s.commit()
 
@@ -75,7 +78,10 @@ def run(engine=None) -> dict:
         for pred_id, fx_id in pred_ids:
             pred = s.get(Prediction, pred_id)
             fx = s.get(Fixture, fx_id)
-            placed = place_bet_from_prediction(pred, engine)
+            features = features_by_pred.get(pred_id, {})
+            pick_is_a = (pred.edge_a or -1) >= (pred.edge_b or -1)
+            rationale = make_rationale(features, pick_is_a, pred.surface)
+            placed = place_bet_from_prediction(pred, engine, rationale=rationale)
             if placed:
                 n_bet += 1
                 fx.status = "bet_placed"

@@ -63,6 +63,10 @@ def export_bets(engine=None, limit_settled: int = 500) -> None:
         for b in s.scalars(select(Bet).order_by(Bet.placed_at.desc())):
             pick = s.get(Player, b.pick_player_id)
             opp = s.get(Player, b.opponent_id)
+            try:
+                rationale = json.loads(b.rationale) if b.rationale else []
+            except (TypeError, ValueError):
+                rationale = []
             rows.append({
                 "id": b.id,
                 "placed_at": b.placed_at,
@@ -75,6 +79,7 @@ def export_bets(engine=None, limit_settled: int = 500) -> None:
                 "stake": b.stake, "odds": b.odds,
                 "model_p": b.model_p, "edge": b.edge,
                 "status": b.status, "pnl": b.pnl,
+                "rationale": rationale,
             })
     open_bets = [r for r in rows if r["status"] == "open"]
     settled = [r for r in rows if r["status"] != "open"][:limit_settled]

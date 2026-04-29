@@ -21,6 +21,15 @@ function Row({ b }: { b: Bet }) {
       <td className="py-2 pr-4">
         <div className="font-medium">{b.pick} <span className="text-ink/40">vs</span> {b.opponent}</div>
         <div className="text-xs text-ink/50">{b.tourney} · {b.tour?.toUpperCase()}</div>
+        {b.rationale && b.rationale.length > 0 && (
+          <div className="mt-1 flex flex-wrap gap-1">
+            {b.rationale.map((r, i) => (
+              <span key={i} className="text-[10px] px-1.5 py-0.5 rounded bg-court/10 text-court border border-court/20">
+                {r}
+              </span>
+            ))}
+          </div>
+        )}
       </td>
       <td className="py-2 pr-4">
         <span className={`pill ${surfaceColor[b.surface] ?? "bg-ink/5"}`}>{b.surface}</span>

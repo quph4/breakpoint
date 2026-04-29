@@ -153,6 +153,7 @@ class Bet(Base):
     status = Column(String, default="open", index=True)  # open | won | lost | void
     pnl = Column(Float)  # +stake*(odds-1) on win, -stake on loss, 0 on void
     settled_at = Column(DateTime)
+    rationale = Column(String)  # JSON-encoded list of short reason strings
 
 
 def get_engine(path: Path | str | None = None):

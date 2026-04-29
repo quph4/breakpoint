@@ -29,6 +29,7 @@ export type Bet = {
   edge: number;
   status: "open" | "won" | "lost" | "void";
   pnl: number | null;
+  rationale?: string[];
 };
 
 export type Player = {
