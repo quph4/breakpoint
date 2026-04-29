@@ -1,0 +1,12 @@
+{
+  "updated_at": "2026-04-29T00:00:00Z",
+  "starting_bankroll": 1000,
+  "bankroll": 1000,
+  "total_bets": 0,
+  "open": 0,
+  "won": 0,
+  "lost": 0,
+  "win_rate": null,
+  "roi": null,
+  "total_pnl": 0
+}

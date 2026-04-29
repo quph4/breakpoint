@@ -1,0 +1,34 @@
+[project]
+name = "breakpoint"
+version = "0.1.0"
+description = "ML-driven fake-money tennis betting bot"
+requires-python = ">=3.11"
+dependencies = [
+    "sqlalchemy>=2.0",
+    "pandas>=2.2",
+    "numpy>=1.26",
+    "lightgbm>=4.3",
+    "scikit-learn>=1.4",
+    "requests>=2.32",
+    "openpyxl>=3.1",
+    "click>=8.1",
+    "python-dateutil>=2.9",
+    "rapidfuzz>=3.6",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.5"]
+
+[project.scripts]
+breakpoint = "breakpoint.cli:cli"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["breakpoint*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

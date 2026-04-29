@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  h1, h2, h3 { @apply font-serif; }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-lg border border-ink/10 p-5 shadow-sm;
+  }
+  .stat {
+    @apply text-3xl font-serif font-bold tracking-tight;
+  }
+  .stat-label {
+    @apply text-xs uppercase tracking-widest text-ink/60;
+  }
+  .pill {
+    @apply inline-block px-2 py-0.5 text-xs rounded-full border;
+  }
+}
