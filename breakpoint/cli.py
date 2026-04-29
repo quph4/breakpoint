@@ -84,11 +84,12 @@ def status():
     """Print current bankroll + bet counts."""
     from .export import export_summary
     s = export_summary()
+    roi = "—" if s["roi"] is None else f"{s['roi'] * 100:+.2f}%"
     click.echo(
         f"Bankroll: ${s['bankroll']:.2f} | "
         f"Bets: {s['total_bets']} ({s['open']} open, {s['won']}W / {s['lost']}L) | "
         f"PnL: ${s['total_pnl']:+.2f} | "
-        f"ROI: {s['roi'] if s['roi'] is None else f'{s[\"roi\"]*100:+.2f}%'}"
+        f"ROI: {roi}"
     )
 
 
