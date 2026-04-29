@@ -6,6 +6,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      refresh_odds:
+        description: "Re-ingest tennis-data.co.uk closing odds for all years (one-shot, ignores year-skip)"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -48,7 +53,12 @@ jobs:
           breakpoint ingest --start-year 2015
 
       - name: Ingest closing odds (tennis-data.co.uk)
-        run: breakpoint ingest-historical-odds --start-year 2015
+        run: |
+          if [ "${{ github.event.inputs.refresh_odds }}" = "true" ]; then
+            breakpoint ingest-historical-odds --start-year 2015 --refresh
+          else
+            breakpoint ingest-historical-odds --start-year 2015
+          fi
         continue-on-error: true
 
       - name: Recompute Elo

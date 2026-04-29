@@ -116,10 +116,11 @@ def audit():
 @cli.command("ingest-historical-odds")
 @click.option("--start-year", type=int, default=2015)
 @click.option("--end-year", type=int, default=None)
-def ingest_historical_odds_cmd(start_year: int, end_year: int | None):
+@click.option("--refresh", is_flag=True, default=False, help="Re-process all years, ignoring the already-ingested skip")
+def ingest_historical_odds_cmd(start_year: int, end_year: int | None, refresh: bool):
     """Pull tennis-data.co.uk closing odds (ATP+WTA) into the Odds table."""
     from .ingest.tennisdata import ingest_all
-    n = ingest_all(start_year=start_year, end_year=end_year)
+    n = ingest_all(start_year=start_year, end_year=end_year, refresh=refresh)
     click.echo(f"Inserted {n} odds rows.")
 
 
