@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {
-  Bar, BarChart, CartesianGrid, Cell, Legend, Line, LineChart, ReferenceLine,
+  Bar, BarChart, CartesianGrid, ReferenceLine,
   ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis,
 } from "recharts";
 import { fetchAudit, type Audit } from "../lib/data";
