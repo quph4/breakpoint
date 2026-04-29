@@ -1,1 +1,36 @@
-[]
+[
+  {
+    "id": 3,
+    "placed_at": "2026-04-29T13:05:16.903224",
+    "match_date": "2026-04-29",
+    "pick": "Arthur Fils",
+    "opponent": "Jiri Lehecka",
+    "tour": "atp",
+    "surface": "Clay",
+    "tourney": "ATP Madrid Open",
+    "stake": 45.12,
+    "odds": 1.62,
+    "model_p": 0.9439024390243902,
+    "edge": 0.5291219512195122,
+    "status": "void",
+    "pnl": 0.0,
+    "rationale": []
+  },
+  {
+    "id": 2,
+    "placed_at": "2026-04-29T13:01:19.337732",
+    "match_date": "2026-04-29",
+    "pick": "Arthur Fils",
+    "opponent": "Jiri Lehecka",
+    "tour": "atp",
+    "surface": "Clay",
+    "tourney": "ATP Madrid Open",
+    "stake": 47.5,
+    "odds": 1.62,
+    "model_p": 0.9439024390243902,
+    "edge": 0.5291219512195122,
+    "status": "void",
+    "pnl": 0.0,
+    "rationale": []
+  }
+]
