@@ -162,9 +162,24 @@ def get_engine(path: Path | str | None = None):
     return create_engine(f"sqlite:///{p}", future=True)
 
 
+def _migrate(engine) -> None:
+    """Add columns introduced after the cached DB was last created.
+
+    SQLAlchemy's create_all only creates missing tables, never alters
+    existing ones, so additive schema changes silently break against a
+    cached DB. We do a minimal check-and-ALTER for known additions.
+    """
+    with engine.connect() as conn:
+        existing_cols = {r[1] for r in conn.exec_driver_sql("PRAGMA table_info(bets)")}
+        if existing_cols and "rationale" not in existing_cols:
+            conn.exec_driver_sql("ALTER TABLE bets ADD COLUMN rationale VARCHAR")
+            conn.commit()
+
+
 def init_db(engine=None):
     engine = engine or get_engine()
     Base.metadata.create_all(engine)
+    _migrate(engine)
     return engine
 
 
