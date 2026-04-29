@@ -25,6 +25,8 @@ def run(engine=None) -> dict:
     today = date.today()
     n_pred = n_bet = n_skip = 0
 
+    # Phase 1: write all predictions in one transaction.
+    pred_ids: list[tuple[int, int]] = []  # (prediction_id, fixture_id)
     with session(engine) as s:
         fixtures = list(s.scalars(
             select(Fixture).where(
@@ -45,14 +47,6 @@ def run(engine=None) -> dict:
                 n_skip += 1
                 continue
             p_a = float(predict_proba(row, model)[0])
-
-            # De-vig the market for a sanity-check edge calculation
-            implied_a = 1 / fx.odds_a
-            implied_b = 1 / fx.odds_b
-            margin = implied_a + implied_b
-            fair_a = implied_a / margin
-            fair_b = implied_b / margin
-
             edge_a = p_a * fx.odds_a - 1
             edge_b = (1 - p_a) * fx.odds_b - 1
 
@@ -70,17 +64,24 @@ def run(engine=None) -> dict:
                 edge_b=edge_b,
             )
             s.add(pred)
-            s.flush()  # need pred.id for bet
+            s.flush()
+            pred_ids.append((pred.id, fx.id))
             n_pred += 1
+        s.commit()
 
+    # Phase 2: place bets in a separate session per prediction so SQLite never
+    # holds two writers at once.
+    with session(engine) as s:
+        for pred_id, fx_id in pred_ids:
+            pred = s.get(Prediction, pred_id)
+            fx = s.get(Fixture, fx_id)
             placed = place_bet_from_prediction(pred, engine)
             if placed:
                 n_bet += 1
                 fx.status = "bet_placed"
-                log.info("BET %s vs %s @ %.2f stake $%.2f edge %.1f%% (model %.3f, market %.3f)",
-                         placed.pick_player_id, placed.opponent_id, placed.odds, placed.stake,
-                         placed.edge * 100, placed.model_p,
-                         fair_a if placed.pick_player_id == fx.player_a_id else fair_b)
+                log.info("BET %s vs %s @ %.2f stake $%.2f edge %.1f%% (model %.3f)",
+                         placed.pick_player_id, placed.opponent_id, placed.odds,
+                         placed.stake, placed.edge * 100, placed.model_p)
             else:
                 fx.status = "predicted"
         s.commit()
