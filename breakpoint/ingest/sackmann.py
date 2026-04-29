@@ -186,11 +186,14 @@ def ingest_rankings(tour: str, since: date | None = None, engine=None) -> int:
         if not records:
             continue
         from sqlalchemy.dialects.sqlite import insert as sqlite_insert
-        stmt = sqlite_insert(Ranking).values(records).prefix_with("OR IGNORE")
+        # SQLite caps placeholders at 32766; chunk to stay well under (5 cols × 5000 = 25000).
+        CHUNK = 5000
         with session(engine) as s:
-            result = s.execute(stmt)
+            for i in range(0, len(records), CHUNK):
+                stmt = sqlite_insert(Ranking).values(records[i:i + CHUNK]).prefix_with("OR IGNORE")
+                result = s.execute(stmt)
+                total += result.rowcount or 0
             s.commit()
-        total += result.rowcount or 0
     log.info("[%s rankings] inserted %d rows", tour, total)
     return total
 
