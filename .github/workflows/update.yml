@@ -46,14 +46,22 @@ jobs:
           breakpoint init-db
           breakpoint ingest --start-year 2015
 
+      - name: Ingest closing odds (tennis-data.co.uk)
+        run: breakpoint ingest-historical-odds --start-year 2015
+        continue-on-error: true
+
       - name: Recompute Elo
         run: breakpoint elo
 
       - name: Train model
         run: breakpoint train --min-year 2015
 
-      - name: Calibration audit
+      - name: Calibration audit (test split)
         run: breakpoint audit
+        continue-on-error: true
+
+      - name: Market vs model audit
+        run: breakpoint audit-market
         continue-on-error: true
 
       - name: Sync fixtures + odds (The Odds API)

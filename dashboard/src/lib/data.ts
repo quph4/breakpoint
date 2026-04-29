@@ -93,3 +93,26 @@ export type ReliabilityBucket = {
 export type ConfBucket = { lo: number; hi: number; n: number; fraction: number };
 
 export const fetchAudit = () => getJson<Audit | null>("audit.json", null);
+
+export type MarketAudit = {
+  n: number;
+  date_min: string;
+  date_max: string;
+  mean_overround: number;
+  model: { log_loss: number; brier: number; n: number };
+  market: { log_loss: number; brier: number; n: number };
+  disagreement_distribution: Array<{
+    lo: number; hi: number; n: number;
+    model_winrate: number | null;
+    market_winrate: number | null;
+    actual_rate: number | null;
+  }>;
+  profit_simulation: Array<{
+    edge_threshold: number;
+    bets: number;
+    pnl_units: number;
+    roi: number | null;
+  }>;
+};
+
+export const fetchMarketAudit = () => getJson<MarketAudit | null>("audit_market.json", null);

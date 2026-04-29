@@ -132,6 +132,16 @@ def export_audit() -> None:
     _write("audit.json", report)
 
 
+def export_market_audit() -> None:
+    from pathlib import Path
+    src = Path(__file__).resolve().parent.parent / "data" / "models" / "audit_market.json"
+    if not src.exists():
+        return
+    import json
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "audit_market.json").write_text(src.read_text(), encoding="utf-8")
+
+
 def export_all(engine=None) -> None:
     engine = engine or init_db()
     export_summary(engine)
@@ -139,3 +149,4 @@ def export_all(engine=None) -> None:
     export_players(engine)
     export_pnl_curve(engine)
     export_audit()
+    export_market_audit()

@@ -105,6 +105,31 @@ def audit():
     )
 
 
+@cli.command("ingest-historical-odds")
+@click.option("--start-year", type=int, default=2015)
+@click.option("--end-year", type=int, default=None)
+def ingest_historical_odds_cmd(start_year: int, end_year: int | None):
+    """Pull tennis-data.co.uk closing odds (ATP+WTA) into the Odds table."""
+    from .ingest.tennisdata import ingest_all
+    n = ingest_all(start_year=start_year, end_year=end_year)
+    click.echo(f"Inserted {n} odds rows.")
+
+
+@cli.command("audit-market")
+def audit_market_cmd():
+    """Compare model predictions to closing-odds market on the test set."""
+    from .audit_market import write_market_audit
+    r = write_market_audit()
+    if r is None:
+        click.echo("No market audit produced — ingest closing odds first.")
+        return
+    click.echo(
+        f"n={r['n']} | model_brier={r['model']['brier']:.4f} | "
+        f"market_brier={r['market']['brier']:.4f} | "
+        f"overround={r['mean_overround']*100:.2f}%"
+    )
+
+
 @cli.command()
 def export():
     """Write JSON snapshots into dashboard/public/data/."""
