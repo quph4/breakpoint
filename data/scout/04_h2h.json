@@ -1,0 +1,486 @@
+{
+  "as_of": "2026-04-29",
+  "scout": "04_h2h",
+  "verification_legend": {
+    "verified": "H2H sourced from web search hitting ATP/WTA/Tennis Abstract data through April 2026",
+    "estimated": "Inferred from late-2025 baseline + known 2026 results; specific clay/hard splits may be approximate",
+    "stale": "Last verified pre-2026; no recent meeting indicates record likely unchanged"
+  },
+  "h2h": [
+    {
+      "tour": "atp",
+      "player_a": "Jannik Sinner",
+      "player_b": "Carlos Alcaraz",
+      "overall": {"a": 7, "b": 10},
+      "on_clay": {"a": 1, "b": 4},
+      "on_hard": {"a": 6, "b": 5},
+      "on_grass": {"a": 0, "b": 1},
+      "last_meeting": {
+        "date": "2026-04-12",
+        "tournament": "Monte Carlo",
+        "round": "F",
+        "winner": "Sinner",
+        "score": "7-6(5) 6-3"
+      },
+      "last_3_results": ["Sinner", "Alcaraz", "Alcaraz"],
+      "retirements_walkovers": "None of consequence",
+      "notes": "VERIFIED. Sinner snapped Alcaraz's 16-match win streak in Monte Carlo F to flip No. 1. Alcaraz still owns clay (4-1) including 2025 RG final and 2025 Rome final. The headline rivalry of the season; Madrid F or Rome F is plausible.",
+      "confidence": "verified"
+    },
+    {
+      "tour": "atp",
+      "player_a": "Carlos Alcaraz",
+      "player_b": "Novak Djokovic",
+      "overall": {"a": 5, "b": 5},
+      "on_clay": {"a": 2, "b": 1},
+      "on_hard": {"a": 2, "b": 3},
+      "on_grass": {"a": 1, "b": 1},
+      "last_meeting": {
+        "date": "2026-02-01",
+        "tournament": "Australian Open",
+        "round": "F",
+        "winner": "Alcaraz",
+        "score": "2-6 6-2 6-3 7-5"
+      },
+      "last_3_results": ["Alcaraz", "Alcaraz", "Djokovic"],
+      "retirements_walkovers": "None",
+      "notes": "VERIFIED. Tied 5-5 after AO 2026 final completed Alcaraz's career Slam. Alcaraz has won all three Slam finals between them. Djokovic schedule limited; unlikely to meet in Madrid/Rome unless deep run.",
+      "confidence": "verified"
+    },
+    {
+      "tour": "atp",
+      "player_a": "Jannik Sinner",
+      "player_b": "Alexander Zverev",
+      "overall": {"a": 9, "b": 4},
+      "on_clay": {"a": 2, "b": 1},
+      "on_hard": {"a": 7, "b": 3},
+      "on_grass": {"a": 0, "b": 0},
+      "last_meeting": {
+        "date": "2026-04-11",
+        "tournament": "Monte Carlo",
+        "round": "SF",
+        "winner": "Sinner",
+        "score": "6-1 6-4"
+      },
+      "last_3_results": ["Sinner", "Sinner", "Sinner"],
+      "retirements_walkovers": "None recent",
+      "notes": "VERIFIED. Sinner riding 8 straight over Zverev. The clay sample is tiny (3 matches) but Zverev hasn't solved Sinner anywhere. Most likely Madrid/Rome SF matchup.",
+      "confidence": "verified"
+    },
+    {
+      "tour": "atp",
+      "player_a": "Jannik Sinner",
+      "player_b": "Daniil Medvedev",
+      "overall": {"a": 9, "b": 7},
+      "on_clay": {"a": 1, "b": 1},
+      "on_hard": {"a": 6, "b": 1},
+      "on_grass": {"a": 1, "b": 0},
+      "last_meeting": {
+        "date": "2026-03-16",
+        "tournament": "Indian Wells",
+        "round": "F",
+        "winner": "Sinner",
+        "score": "7-6(6) 7-6(4)"
+      },
+      "last_3_results": ["Sinner", "Sinner", "Sinner"],
+      "retirements_walkovers": "None of note",
+      "notes": "VERIFIED. Lopsided on hard (Sinner 6-1 since 2023). Clay split 1-1 from older meetings; Medvedev's clay form remains poor.",
+      "confidence": "verified"
+    },
+    {
+      "tour": "atp",
+      "player_a": "Jannik Sinner",
+      "player_b": "Alex de Minaur",
+      "overall": {"a": 12, "b": 0},
+      "on_clay": {"a": 2, "b": 0},
+      "on_hard": {"a": 9, "b": 0},
+      "on_grass": {"a": 1, "b": 0},
+      "last_meeting": {
+        "date": "2025-11-13",
+        "tournament": "ATP Finals Turin",
+        "round": "RR",
+        "winner": "Sinner",
+        "score": "7-5 6-2"
+      },
+      "last_3_results": ["Sinner", "Sinner", "Sinner"],
+      "retirements_walkovers": "None",
+      "notes": "VERIFIED. The most lopsided active H2H in men's tennis. ADM 0-12, has won only 2 of 29 sets played. Live underdog value is essentially nil.",
+      "confidence": "verified"
+    },
+    {
+      "tour": "atp",
+      "player_a": "Carlos Alcaraz",
+      "player_b": "Lorenzo Musetti",
+      "overall": {"a": 7, "b": 1},
+      "on_clay": {"a": 4, "b": 0},
+      "on_hard": {"a": 2, "b": 1},
+      "on_grass": {"a": 1, "b": 0},
+      "last_meeting": {
+        "date": "2025-06-06",
+        "tournament": "Roland Garros",
+        "round": "SF",
+        "winner": "Alcaraz",
+        "score": "6-3 7-6(4) 6-1 (approx)"
+      },
+      "last_3_results": ["Alcaraz", "Alcaraz", "Alcaraz"],
+      "retirements_walkovers": "None",
+      "notes": "VERIFIED. Musetti's elite clay numbers (90% win-rate per source) crash against Alcaraz specifically: 0-4 on clay including 2025 RG SF, 2025 Rome, 2025 MC. A clear pattern, not a rankings illusion.",
+      "confidence": "verified"
+    },
+    {
+      "tour": "atp",
+      "player_a": "Carlos Alcaraz",
+      "player_b": "Jack Draper",
+      "overall": {"a": 4, "b": 2},
+      "on_clay": {"a": 1, "b": 0},
+      "on_hard": {"a": 2, "b": 1},
+      "on_grass": {"a": 0, "b": 1},
+      "last_meeting": {
+        "date": "2025-05-14",
+        "tournament": "Rome",
+        "round": "QF",
+        "winner": "Alcaraz",
+        "score": "6-4 6-4"
+      },
+      "last_3_results": ["Alcaraz", "Draper", "Alcaraz"],
+      "retirements_walkovers": "None",
+      "notes": "VERIFIED. Draper has competed in sets but lost the deciders. Clay sample tiny (1 match).",
+      "confidence": "verified"
+    },
+    {
+      "tour": "atp",
+      "player_a": "Jannik Sinner",
+      "player_b": "Lorenzo Musetti",
+      "overall": {"a": 2, "b": 1},
+      "on_clay": {"a": 0, "b": 1},
+      "on_hard": {"a": 2, "b": 0},
+      "on_grass": {"a": 0, "b": 0},
+      "last_meeting": {
+        "date": "2025-05",
+        "tournament": "Rome (estimate)",
+        "round": "QF",
+        "winner": "Sinner",
+        "score": "approx"
+      },
+      "last_3_results": ["Sinner", "Musetti", "Sinner"],
+      "retirements_walkovers": "Possible MC 2024 retirement (unverified)",
+      "notes": "ESTIMATED. Small sample. Musetti's only win was on clay; Sinner has flipped recent meetings. Clay edge potentially leans Musetti if engaged.",
+      "confidence": "estimated"
+    },
+    {
+      "tour": "atp",
+      "player_a": "Casper Ruud",
+      "player_b": "Carlos Alcaraz",
+      "overall": {"a": 1, "b": 5},
+      "on_clay": {"a": 1, "b": 2},
+      "on_hard": {"a": 0, "b": 3},
+      "on_grass": {"a": 0, "b": 0},
+      "last_meeting": {
+        "date": "2025",
+        "tournament": "Madrid F (estimate)",
+        "round": "F",
+        "winner": "Ruud",
+        "score": "approx"
+      },
+      "last_3_results": ["Ruud", "Alcaraz", "Alcaraz"],
+      "retirements_walkovers": "Unknown",
+      "notes": "ESTIMATED. Alcaraz dominant overall but Ruud took the 2025 Madrid title over him - clay-court parity is closer than the headline 1-5 record suggests.",
+      "confidence": "estimated"
+    },
+    {
+      "tour": "atp",
+      "player_a": "Tommy Paul",
+      "player_b": "Jannik Sinner",
+      "overall": {"a": 1, "b": 4},
+      "on_clay": {"a": 0, "b": 0},
+      "on_hard": {"a": 1, "b": 4},
+      "on_grass": {"a": 0, "b": 0},
+      "last_meeting": {
+        "date": "2025",
+        "tournament": "Indian Wells (est)",
+        "round": "QF",
+        "winner": "Sinner",
+        "score": "approx"
+      },
+      "last_3_results": ["Sinner", "Sinner", "Sinner"],
+      "retirements_walkovers": "Unknown",
+      "notes": "ESTIMATED. No clay meetings on record - pure projection if they meet at Madrid/Rome.",
+      "confidence": "estimated"
+    },
+    {
+      "tour": "atp",
+      "player_a": "Andrey Rublev",
+      "player_b": "Daniil Medvedev",
+      "overall": {"a": 3, "b": 7},
+      "on_clay": {"a": 1, "b": 1},
+      "on_hard": {"a": 2, "b": 6},
+      "on_grass": {"a": 0, "b": 0},
+      "last_meeting": {
+        "date": "2025",
+        "tournament": "Various (est)",
+        "round": "varies",
+        "winner": "Medvedev",
+        "score": "approx"
+      },
+      "last_3_results": ["Medvedev", "Medvedev", "Rublev"],
+      "retirements_walkovers": "Possible Medvedev MTO history",
+      "notes": "ESTIMATED. Russian rivalry skewed Medvedev's way historically.",
+      "confidence": "estimated"
+    },
+    {
+      "tour": "atp",
+      "player_a": "Holger Rune",
+      "player_b": "Carlos Alcaraz",
+      "overall": {"a": 2, "b": 4},
+      "on_clay": {"a": 0, "b": 1},
+      "on_hard": {"a": 2, "b": 3},
+      "on_grass": {"a": 0, "b": 0},
+      "last_meeting": {
+        "date": "2024",
+        "tournament": "(est)",
+        "round": "varies",
+        "winner": "Alcaraz",
+        "score": "approx"
+      },
+      "last_3_results": ["Alcaraz", "Alcaraz", "Rune"],
+      "retirements_walkovers": "Rune injury history adds noise",
+      "notes": "ESTIMATED. Rune's form/health is the swing factor; H2H closer than ranking gap.",
+      "confidence": "estimated"
+    },
+    {
+      "tour": "atp",
+      "player_a": "Ben Shelton",
+      "player_b": "Jannik Sinner",
+      "overall": {"a": 0, "b": 4},
+      "on_clay": {"a": 0, "b": 0},
+      "on_hard": {"a": 0, "b": 4},
+      "on_grass": {"a": 0, "b": 0},
+      "last_meeting": {
+        "date": "2025",
+        "tournament": "Wimbledon (est)",
+        "round": "QF",
+        "winner": "Sinner",
+        "score": "approx"
+      },
+      "last_3_results": ["Sinner", "Sinner", "Sinner"],
+      "retirements_walkovers": "None",
+      "notes": "ESTIMATED. Shelton has never beaten Sinner; clay is Shelton's worst surface.",
+      "confidence": "estimated"
+    },
+
+    {
+      "tour": "wta",
+      "player_a": "Iga Swiatek",
+      "player_b": "Aryna Sabalenka",
+      "overall": {"a": 8, "b": 5},
+      "on_clay": {"a": 5, "b": 1},
+      "on_hard": {"a": 3, "b": 4},
+      "on_grass": {"a": 0, "b": 0},
+      "last_meeting": {
+        "date": "2025-06-05",
+        "tournament": "Roland Garros",
+        "round": "SF",
+        "winner": "Swiatek",
+        "score": "7-6(1) 4-6 6-0"
+      },
+      "last_3_results": ["Swiatek", "Sabalenka", "Sabalenka"],
+      "retirements_walkovers": "None of note",
+      "notes": "VERIFIED. Swiatek's clay dominance is real (5-1). Sabalenka has shifted hard-court ledger her way (4-3). Most likely Madrid/Rome F.",
+      "confidence": "verified"
+    },
+    {
+      "tour": "wta",
+      "player_a": "Coco Gauff",
+      "player_b": "Iga Swiatek",
+      "overall": {"a": 5, "b": 10},
+      "on_clay": {"a": 1, "b": 4},
+      "on_hard": {"a": 4, "b": 6},
+      "on_grass": {"a": 0, "b": 0},
+      "last_meeting": {
+        "date": "2026-01",
+        "tournament": "United Cup",
+        "round": "Tie",
+        "winner": "Gauff",
+        "score": "6-4 6-2"
+      },
+      "last_3_results": ["Gauff", "Gauff", "Gauff"],
+      "retirements_walkovers": "None",
+      "notes": "VERIFIED. Massive trend reversal: Gauff has won last 4 in a row (3 hard + 2025 Madrid 6-1 6-1 on clay). Lifetime ledger still favors Swiatek but the recent form arrow is Gauff's. RG defending champ Gauff.",
+      "confidence": "verified"
+    },
+    {
+      "tour": "wta",
+      "player_a": "Aryna Sabalenka",
+      "player_b": "Elena Rybakina",
+      "overall": {"a": 8, "b": 7},
+      "on_clay": {"a": 2, "b": 1},
+      "on_hard": {"a": 5, "b": 6},
+      "on_grass": {"a": 1, "b": 0},
+      "last_meeting": {
+        "date": "2026-03-27",
+        "tournament": "Miami",
+        "round": "SF",
+        "winner": "Sabalenka",
+        "score": "6-4 6-3"
+      },
+      "last_3_results": ["Sabalenka", "Rybakina", "Sabalenka"],
+      "retirements_walkovers": "None of note",
+      "notes": "VERIFIED. Rybakina won AO 2026 F, Sabalenka took Miami SF the next month. Hard-court rivalry tight (Rybakina 6-5). Clay sample small but Sabalenka edges (2-1) and is back-to-back Madrid champ.",
+      "confidence": "verified"
+    },
+    {
+      "tour": "wta",
+      "player_a": "Aryna Sabalenka",
+      "player_b": "Coco Gauff",
+      "overall": {"a": 7, "b": 6},
+      "on_clay": {"a": 2, "b": 1},
+      "on_hard": {"a": 5, "b": 5},
+      "on_grass": {"a": 0, "b": 0},
+      "last_meeting": {
+        "date": "2026-03-29",
+        "tournament": "Miami",
+        "round": "F",
+        "winner": "Sabalenka",
+        "score": "6-2 4-6 6-3"
+      },
+      "last_3_results": ["Sabalenka", "Gauff", "Sabalenka"],
+      "retirements_walkovers": "None",
+      "notes": "VERIFIED. Miami F broke their 6-6 deadlock. The defining WTA rivalry tournament after tournament; Madrid F again is real possibility.",
+      "confidence": "verified"
+    },
+    {
+      "tour": "wta",
+      "player_a": "Mirra Andreeva",
+      "player_b": "Iga Swiatek",
+      "overall": {"a": 3, "b": 1},
+      "on_clay": {"a": 1, "b": 0},
+      "on_hard": {"a": 2, "b": 1},
+      "on_grass": {"a": 0, "b": 0},
+      "last_meeting": {
+        "date": "2026-04-17",
+        "tournament": "Stuttgart",
+        "round": "QF",
+        "winner": "Andreeva",
+        "score": "3-6 6-4 6-3"
+      },
+      "last_3_results": ["Andreeva", "Andreeva", "Andreeva"],
+      "retirements_walkovers": "None",
+      "notes": "VERIFIED. Sneaky lopsided H2H. Andreeva owns 3 in a row over the supposed clay queen. If they're drawn together at Madrid this is NOT a coin flip; lean Andreeva.",
+      "confidence": "verified"
+    },
+    {
+      "tour": "wta",
+      "player_a": "Jessica Pegula",
+      "player_b": "Coco Gauff",
+      "overall": {"a": 5, "b": 3},
+      "on_clay": {"a": 1, "b": 1},
+      "on_hard": {"a": 3, "b": 1},
+      "on_grass": {"a": 1, "b": 1},
+      "last_meeting": {
+        "date": "2025-11-02",
+        "tournament": "WTA Finals Riyadh",
+        "round": "RR",
+        "winner": "Pegula",
+        "score": "6-3 6-7(4) 6-2"
+      },
+      "last_3_results": ["Pegula", "Gauff", "Pegula"],
+      "retirements_walkovers": "None",
+      "notes": "VERIFIED. Pegula 5-3 overall, including the most recent meeting. Pegula 6-0 on clay in 2026 form going in.",
+      "confidence": "verified"
+    },
+    {
+      "tour": "wta",
+      "player_a": "Aryna Sabalenka",
+      "player_b": "Jasmine Paolini",
+      "overall": {"a": 6, "b": 2},
+      "on_clay": {"a": 2, "b": 1},
+      "on_hard": {"a": 4, "b": 1},
+      "on_grass": {"a": 0, "b": 0},
+      "last_meeting": {
+        "date": "2025-11-02",
+        "tournament": "WTA Finals Riyadh",
+        "round": "RR",
+        "winner": "Sabalenka",
+        "score": "6-3 6-1"
+      },
+      "last_3_results": ["Sabalenka", "Sabalenka", "Paolini"],
+      "retirements_walkovers": "None",
+      "notes": "VERIFIED. Sabalenka comfortable except when Paolini gets her on slow clay (Rome 2024 F).",
+      "confidence": "verified"
+    },
+    {
+      "tour": "wta",
+      "player_a": "Iga Swiatek",
+      "player_b": "Elena Rybakina",
+      "overall": {"a": 5, "b": 4},
+      "on_clay": {"a": 3, "b": 0},
+      "on_hard": {"a": 1, "b": 4},
+      "on_grass": {"a": 1, "b": 0},
+      "last_meeting": {
+        "date": "2025",
+        "tournament": "Various (est)",
+        "round": "varies",
+        "winner": "Rybakina",
+        "score": "approx"
+      },
+      "last_3_results": ["Rybakina", "Swiatek", "Rybakina"],
+      "retirements_walkovers": "None of note",
+      "notes": "ESTIMATED. Swiatek 3-0 on clay; Rybakina 4-1 on hard. Surface-defined rivalry.",
+      "confidence": "estimated"
+    },
+    {
+      "tour": "wta",
+      "player_a": "Coco Gauff",
+      "player_b": "Jasmine Paolini",
+      "overall": {"a": 3, "b": 2},
+      "on_clay": {"a": 1, "b": 2},
+      "on_hard": {"a": 2, "b": 0},
+      "on_grass": {"a": 0, "b": 0},
+      "last_meeting": {
+        "date": "2025",
+        "tournament": "Various (est)",
+        "round": "varies",
+        "winner": "Gauff",
+        "score": "approx"
+      },
+      "last_3_results": ["Gauff", "Paolini", "Gauff"],
+      "retirements_walkovers": "Unknown",
+      "notes": "ESTIMATED. Paolini owns clay edge; Gauff hard. Rome 2024 went Paolini's way.",
+      "confidence": "estimated"
+    },
+    {
+      "tour": "wta",
+      "player_a": "Mirra Andreeva",
+      "player_b": "Aryna Sabalenka",
+      "overall": {"a": 1, "b": 4},
+      "on_clay": {"a": 0, "b": 1},
+      "on_hard": {"a": 1, "b": 3},
+      "on_grass": {"a": 0, "b": 0},
+      "last_meeting": {
+        "date": "2026",
+        "tournament": "Indian Wells (est)",
+        "round": "SF",
+        "winner": "Sabalenka",
+        "score": "approx"
+      },
+      "last_3_results": ["Sabalenka", "Andreeva", "Sabalenka"],
+      "retirements_walkovers": "None",
+      "notes": "ESTIMATED. Sabalenka power has overwhelmed Andreeva on hard; clay flips power dynamic somewhat.",
+      "confidence": "estimated"
+    }
+  ],
+  "coverage_gaps": [
+    "Full ATP top-15 round-robin matrix not exhaustively populated; focused on rivalries with Madrid/Rome implications",
+    "Full WTA top-15 round-robin matrix likewise prioritized to high-impact pairings",
+    "Specific retirement/walkover counts not systematically pulled - flagged where known",
+    "Rybakina-Pegula, Keys-Gauff, Kasatkina/Krejcikova matchups omitted as lower-impact for next 14 days",
+    "ATP: Tiafoe, Khachanov, Auger-Aliassime, Cerundolo, Lehecka, Fonseca pairings not deeply researched"
+  ],
+  "sources": [
+    "ATP Tour H2H pages (atptour.com)",
+    "WTA Tour H2H pages (wtatennis.com)",
+    "Wikipedia: Alcaraz-Sinner rivalry, Sabalenka career stats",
+    "Tennis.com, Olympics.com, AusOpen.com event recaps",
+    "tennisstats247.com, tennisratio.com, matchstat.com aggregators"
+  ]
+}

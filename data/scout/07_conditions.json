@@ -1,0 +1,242 @@
+{
+  "as_of": "2026-04-29",
+  "data_provenance": {
+    "confirmed_facts": "Venue physical characteristics (altitude, surface, roof, ball brand) are confirmed historical facts from ATP/WTA tournament technical specs and Tennis Abstract court speed archives.",
+    "estimated": "7-day weather forecasts are climatological estimates based on April-May historical norms for each city — NOT live forecast data. Live verification via weather.com/wunderground required before betting use.",
+    "court_pace_index_note": "CPI values sourced from Tennis Abstract / Jeff Sackmann historical surface speed analysis (most recent published seasons). Tour-level CPI is not officially published per-event by ATP.",
+    "scout": "07 — Court Conditions, Venues, Weather"
+  },
+  "tournaments": [
+    {
+      "name": "Mutua Madrid Open 2026",
+      "status": "running — finals weekend May 2-3",
+      "city": "Madrid, Spain",
+      "timezone": "CEST (UTC+2)",
+      "altitude_m": 667,
+      "indoor": false,
+      "roof": true,
+      "roof_courts": ["Manolo Santana (Center)", "Arantxa Sanchez", "Estadio 3"],
+      "surface": "Red clay (Caja Magica clay blend)",
+      "court_speed": "fast (for clay) — plays closer to medium hard than to Rome/RG",
+      "court_pace_index_estimate": 28,
+      "cpi_context": "Among the fastest clay swings on tour. Madrid CPI historically ~27-30 vs Rome ~20-23 and Roland Garros ~22-25.",
+      "ball": "Dunlop Fort Clay Court",
+      "weather_7day_estimated": [
+        {"date": "2026-04-29", "high_c": 23, "low_c": 11, "rain_pct": 15, "wind_kph": 18},
+        {"date": "2026-04-30", "high_c": 25, "low_c": 12, "rain_pct": 10, "wind_kph": 14},
+        {"date": "2026-05-01", "high_c": 26, "low_c": 13, "rain_pct": 5,  "wind_kph": 12},
+        {"date": "2026-05-02", "high_c": 27, "low_c": 14, "rain_pct": 5,  "wind_kph": 15},
+        {"date": "2026-05-03", "high_c": 26, "low_c": 13, "rain_pct": 20, "wind_kph": 20},
+        {"date": "2026-05-04", "high_c": 24, "low_c": 12, "rain_pct": 30, "wind_kph": 22},
+        {"date": "2026-05-05", "high_c": 22, "low_c": 11, "rain_pct": 25, "wind_kph": 18}
+      ],
+      "scheduling_note": "Day session opens 11:00 local on outer courts, 12:00 Manolo Santana. Night session starts 20:30 — significantly cooler, denser air, ball flies measurably less. Day/night gap on Center Court is the biggest scheduling edge in tennis.",
+      "forecast_disruptions": [
+        "Possible thunderstorms Sunday-Monday (May 3-4) per climatology — roof available on three show courts but outer courts will delay.",
+        "Wind on Center Court swirls due to stadium architecture — top-spin players lose more shape than flat hitters."
+      ],
+      "conditions_quirks": [
+        "667m elevation — air density ~7-8% lower than sea level. Ball travels further, bounces higher, serves play 6-10 kph faster effective speed.",
+        "Lower humidity (often 25-40%) makes balls fluff less, stay faster through the match.",
+        "Day-to-night swing: balls played indoors-under-roof at night behave like indoor hard court. Roof closure changes match dynamics drastically."
+      ],
+      "betting_implications": [
+        "Big servers gain ~4-7% expected hold rate vs sea-level clay — fade clay-court grinders priced as if this were Monte Carlo.",
+        "Flat ball-strikers (Sinner archetype, Alcaraz on the run, Zverev serve) historically over-perform their clay baselines here.",
+        "Heavy topspin specialists (Ruud, Tsitsipas, Musetti) lose ~3-5% margin vs Rome equivalents — air doesn't grip the spin.",
+        "Night-session underdog with flat game vs day-session topspin favorite is a recurring +EV pattern.",
+        "Roof-closed matches: bet the cleaner ball-striker, not the fitness/grind player."
+      ]
+    },
+    {
+      "name": "Internazionali BNL d'Italia (Rome) 2026",
+      "status": "upcoming — main draw starts May 6",
+      "city": "Rome, Italy",
+      "timezone": "CEST (UTC+2)",
+      "altitude_m": 21,
+      "indoor": false,
+      "roof": false,
+      "roof_courts": [],
+      "surface": "Red clay (traditional European red clay, heavier sand content)",
+      "court_speed": "slow — among the slowest on tour",
+      "court_pace_index_estimate": 22,
+      "cpi_context": "Foro Italico clay is traditionally heavy and damp. CPI ~20-23. Rallies extend, kick serves bounce above shoulder, drop shots become viable.",
+      "ball": "Dunlop ATP Championship (clay) — historically Pelota Head/Dunlop rotation, Dunlop in recent contracts",
+      "weather_7day_estimated": [
+        {"date": "2026-04-29", "high_c": 22, "low_c": 12, "rain_pct": 30, "wind_kph": 14},
+        {"date": "2026-04-30", "high_c": 21, "low_c": 11, "rain_pct": 40, "wind_kph": 16},
+        {"date": "2026-05-01", "high_c": 23, "low_c": 12, "rain_pct": 25, "wind_kph": 12},
+        {"date": "2026-05-02", "high_c": 24, "low_c": 13, "rain_pct": 20, "wind_kph": 10},
+        {"date": "2026-05-03", "high_c": 25, "low_c": 14, "rain_pct": 15, "wind_kph": 11},
+        {"date": "2026-05-04", "high_c": 26, "low_c": 14, "rain_pct": 10, "wind_kph": 12},
+        {"date": "2026-05-05", "high_c": 27, "low_c": 15, "rain_pct": 15, "wind_kph": 13}
+      ],
+      "scheduling_note": "Day matches 11:00 local, late session 19:00-21:00. Humidity rises in evening as Tiber valley cools — clay gets heavier, balls play even slower.",
+      "forecast_disruptions": [
+        "NO ROOF on any Foro Italico court — every rain cell is a delay. Rome historically sees 2-4 disrupted days per fortnight.",
+        "Early-week rain (April 30 / May 1 climatology) could compress qualifying schedule into main draw."
+      ],
+      "conditions_quirks": [
+        "Sea-level, humid Mediterranean air — opposite of Madrid. Ball stays heavy, kicks high off the strike zone.",
+        "Pino marittimo and umbrella pines around courts cause swirling micro-winds on Pietrangeli and Grand Stand.",
+        "Clay dries unevenly after rain — early matches post-delay favor the cleaner mover.",
+        "Late-tournament courts get chewed up; bad bounces multiply by quarterfinals."
+      ],
+      "betting_implications": [
+        "Pure clay-courters (Ruud, Cerundolo, Musetti, Djere archetype) get back the edge they lost in Madrid — overlay opportunity vs market still pricing off Madrid form.",
+        "Big servers lose ~5-8% hold rate vs Madrid baseline — fade Zverev/Rublev/Medvedev serve premiums.",
+        "Fitness and 3-set stamina matter more here than any other Masters event. Younger field with deep gas tanks over-performs.",
+        "Lefties with heavy topspin (Nadal historical archetype, Diallo, Etcheverry) gain extra value — the ad-court kick serve becomes a weapon.",
+        "Rain-delay restart matches: bet the player who warms up faster, not the higher seed.",
+        "Watch for back-to-back-day fatigue spots after rain compresses schedule mid-tournament."
+      ]
+    },
+    {
+      "name": "Internationaux de Strasbourg 2026 (WTA 500)",
+      "status": "upcoming — May 17-23 (Roland Garros buildup)",
+      "city": "Strasbourg, France",
+      "timezone": "CEST (UTC+2)",
+      "altitude_m": 142,
+      "indoor": false,
+      "roof": false,
+      "surface": "Red clay",
+      "court_speed": "medium — slightly faster than RG",
+      "court_pace_index_estimate": 24,
+      "ball": "Wilson Roland Garros (clay)",
+      "weather_7day_estimated": [
+        {"date": "2026-05-17", "high_c": 20, "low_c": 9,  "rain_pct": 35, "wind_kph": 14},
+        {"date": "2026-05-18", "high_c": 21, "low_c": 10, "rain_pct": 30, "wind_kph": 13},
+        {"date": "2026-05-19", "high_c": 22, "low_c": 11, "rain_pct": 25, "wind_kph": 12},
+        {"date": "2026-05-20", "high_c": 22, "low_c": 11, "rain_pct": 30, "wind_kph": 14},
+        {"date": "2026-05-21", "high_c": 21, "low_c": 10, "rain_pct": 40, "wind_kph": 16},
+        {"date": "2026-05-22", "high_c": 20, "low_c": 10, "rain_pct": 35, "wind_kph": 15},
+        {"date": "2026-05-23", "high_c": 21, "low_c": 11, "rain_pct": 30, "wind_kph": 13}
+      ],
+      "scheduling_note": "Day matches start 11:00. Single-session format, no night play. Cool, often damp continental conditions.",
+      "forecast_disruptions": [
+        "Rhine valley spring weather is volatile — expect at least one rain day per week.",
+        "Cool mornings under 12C — balls launched cold play significantly slower in opening sets."
+      ],
+      "conditions_quirks": [
+        "Uses Wilson RG balls one week before RG — direct prep value, market often underweights the ball-match.",
+        "Cooler than Mediterranean clay swing — heavy ball, low bounce, rewards clean strikers over kick servers."
+      ],
+      "betting_implications": [
+        "Players using this as RG tune-up with the same ball/conditions outperform their seeding. Look for RG main-draw entrants over qualifiers.",
+        "Cold-weather clay favors flat hitters and counterpunchers over big-spin junkies (cold ball = less spin grip)."
+      ]
+    },
+    {
+      "name": "Geneva Open 2026 (ATP 250)",
+      "status": "upcoming — May 17-23 (Roland Garros buildup)",
+      "city": "Geneva, Switzerland",
+      "timezone": "CEST (UTC+2)",
+      "altitude_m": 375,
+      "indoor": false,
+      "roof": false,
+      "surface": "Red clay",
+      "court_speed": "medium — moderate altitude bump",
+      "court_pace_index_estimate": 25,
+      "ball": "Wilson Roland Garros (clay)",
+      "weather_7day_estimated": [
+        {"date": "2026-05-17", "high_c": 21, "low_c": 10, "rain_pct": 30, "wind_kph": 12},
+        {"date": "2026-05-18", "high_c": 22, "low_c": 11, "rain_pct": 25, "wind_kph": 11},
+        {"date": "2026-05-19", "high_c": 23, "low_c": 11, "rain_pct": 20, "wind_kph": 10},
+        {"date": "2026-05-20", "high_c": 23, "low_c": 12, "rain_pct": 25, "wind_kph": 12},
+        {"date": "2026-05-21", "high_c": 22, "low_c": 11, "rain_pct": 35, "wind_kph": 14},
+        {"date": "2026-05-22", "high_c": 21, "low_c": 11, "rain_pct": 30, "wind_kph": 13},
+        {"date": "2026-05-23", "high_c": 22, "low_c": 11, "rain_pct": 25, "wind_kph": 12}
+      ],
+      "scheduling_note": "Day session only, 11:00 start. Lake Geneva micro-climate produces fast afternoon weather changes.",
+      "forecast_disruptions": [
+        "No roof — alpine spring storms possible.",
+        "Bise (north wind) can pick up suddenly off the lake."
+      ],
+      "conditions_quirks": [
+        "375m altitude — modest ball-flight bump vs Rome but nowhere near Madrid.",
+        "Wilson RG balls — same direct prep value as Strasbourg.",
+        "Field typically thinner than Roland Garros qualifying — veteran clay specialists get last tune-up reps."
+      ],
+      "betting_implications": [
+        "Top seeds historically protect ranking points here — favorites slightly overvalued in 1R/2R.",
+        "Top-100 grinder vs faded top-30 name = recurring overlay; the grinder's match reps outweigh the name."
+      ]
+    },
+    {
+      "name": "Lyon Open 2026 (ATP 250 — replacement event TBD or returning event)",
+      "status": "upcoming if scheduled — May 17-23 window",
+      "city": "Lyon, France",
+      "timezone": "CEST (UTC+2)",
+      "altitude_m": 173,
+      "indoor": false,
+      "roof": false,
+      "surface": "Red clay",
+      "court_speed": "medium",
+      "court_pace_index_estimate": 24,
+      "ball": "Wilson Roland Garros (clay)",
+      "scheduling_note": "Confirm 2026 calendar slot — has rotated with other 250s in this window.",
+      "weather_7day_estimated": [
+        {"date": "2026-05-17", "high_c": 22, "low_c": 11, "rain_pct": 30, "wind_kph": 12}
+      ],
+      "betting_implications": [
+        "If event runs: similar profile to Geneva — same ball, slightly warmer, slightly lower altitude. Treat all betting reads as Geneva-equivalent."
+      ],
+      "note": "Listed for completeness; verify calendar status before applying."
+    },
+    {
+      "name": "Roland Garros 2026 — buildup conditions note",
+      "status": "main draw begins May 24 (outside 2-week window but conditions context relevant)",
+      "city": "Paris, France",
+      "timezone": "CEST (UTC+2)",
+      "altitude_m": 35,
+      "indoor": false,
+      "roof": true,
+      "roof_courts": ["Philippe-Chatrier", "Suzanne-Lenglen"],
+      "surface": "Red clay (crushed brick over limestone)",
+      "court_speed": "slow-medium",
+      "court_pace_index_estimate": 23,
+      "ball": "Wilson Roland Garros",
+      "conditions_quirks": [
+        "New clay batch each year — early-tournament reports about how the surface is playing matter. 2024 was notably slower; 2025 reportedly truer-bouncing. Track press conferences in week 1.",
+        "Chatrier and Lenglen roofs change matches into indoor clay — heavier, slower, lower bounce. Indoor RG favors grinders even more than outdoor RG.",
+        "Paris May weather is famously volatile — 9C and rain or 28C and humid, sometimes in the same day."
+      ],
+      "betting_implications_pre_buildup": [
+        "Players who win Strasbourg/Geneva with the Wilson RG ball are the cleanest read into RG week 1.",
+        "Avoid extrapolating Madrid form — different ball, altitude, court speed. Rome is the better predictor."
+      ]
+    }
+  ],
+  "cross_event_archetype_matrix": {
+    "big_server_flat_hitter": {
+      "Madrid": "+",
+      "Rome": "--",
+      "Strasbourg_Geneva": "neutral-to-slight-minus",
+      "Roland_Garros": "-"
+    },
+    "heavy_topspin_grinder": {
+      "Madrid": "-",
+      "Rome": "++",
+      "Strasbourg_Geneva": "+",
+      "Roland_Garros": "++"
+    },
+    "lefty_kick_serve": {
+      "Madrid": "neutral",
+      "Rome": "++",
+      "Strasbourg_Geneva": "+",
+      "Roland_Garros": "++"
+    },
+    "counterpuncher_retriever": {
+      "Madrid": "-",
+      "Rome": "+",
+      "Strasbourg_Geneva": "+",
+      "Roland_Garros": "++"
+    },
+    "drop_shot_artist": {
+      "Madrid": "neutral (high bounce hurts disguise)",
+      "Rome": "++ (heavy clay rewards touch)",
+      "Strasbourg_Geneva": "+",
+      "Roland_Garros": "++"
+    }
+  }
+}

@@ -1,0 +1,312 @@
+{
+  "as_of": "2026-04-29",
+  "scout": "05_injuries",
+  "beat": "Injuries, withdrawals, illness, fatigue, fitness concerns",
+  "active_concerns": [
+    {
+      "tour": "atp",
+      "name": "Carlos Alcaraz",
+      "rank": 2,
+      "issue": "right wrist injury, sustained mid-match at Barcelona vs Otto Virtanen; tests showed it was 'slightly more serious than expected'",
+      "first_reported": "2026-04-15",
+      "last_match": "2026-04-15 Barcelona R1 vs Virtanen (won, but required treatment, then withdrew before next round)",
+      "expected_return": "OUT Madrid 2026, OUT Rome 2026, OUT Roland Garros 2026 (defending champion); grass season target",
+      "source_summary": "ATP Tour, beIN, Outlook India, profootballnetwork: Alcaraz withdrew from Madrid Apr 17, then ruled himself out of Rome and confirmed RG withdrawal Apr 24. Two-time defending RG champ. Loses ~3,000 ranking points.",
+      "betting_impact": "MASSIVE. Sinner now overwhelming RG favorite (was co-favorite). Outright RG market needs full repricing. Any lingering Alcaraz futures still on the board are dead money. Watch for grass-season odds — wrist injuries on a topspin-heavy player linger; fade Queen's/Wimbledon top-3 lines until match practice."
+    },
+    {
+      "tour": "atp",
+      "name": "Novak Djokovic",
+      "rank": 5,
+      "issue": "right shoulder injury, originated at Indian Wells",
+      "first_reported": "2026-03 (Indian Wells)",
+      "last_match": "Indian Wells 2026 (per reporting)",
+      "expected_return": "OUT Miami, OUT Monte Carlo, OUT Madrid; targeting Rome (May 7) but conceded he may delay until Roland Garros",
+      "source_summary": "ATP Tour, Tennis.com, Ubitennis, Puntodebreak: Djokovic quote 'I am injured, I hope to at least reach Roland Garros.' Limited match practice on clay heading into RG.",
+      "betting_impact": "Fade if listed in Rome. Even if he plays Rome it's a comeback rep, not a title run. RG outright at any short price is poor value with no clay matches and a 38yo shoulder. Live-bet against him in early rounds Rome if he enters."
+    },
+    {
+      "tour": "atp",
+      "name": "Holger Rune",
+      "rank": null,
+      "issue": "left Achilles tendon — full rupture, surgery October 2025",
+      "first_reported": "2025-10 (Stockholm vs Humbert, R2)",
+      "last_match": "2025-10, Stockholm (RTD)",
+      "expected_return": "Hamburg ATP 500, May 17-23, 2026 — confirmed by Rune; Roland Garros possible but unlikely match-fit",
+      "source_summary": "ATP Tour feature, Tennis.com, Puntodebreak: Rune ahead of typical 9-12 month timeline. Steve Johnson publicly called the Hamburg return 'awful' / risky. Training on indoor clay at Mouratoglou.",
+      "betting_impact": "Comeback from Achilles rupture on clay is the single highest re-injury risk profile in tennis. Fade Rune in Hamburg and any RG outright. First-round opponents (any decent claycourter) are live underdogs. Movement-restricted player on slow clay = drained legs by set 3."
+    },
+    {
+      "tour": "atp",
+      "name": "Jack Draper",
+      "rank": 7,
+      "issue": "knee tendon injury (patellar/quad tendon area)",
+      "first_reported": "2026-04 Barcelona R1 (RTD vs Etcheverry, down 1-4 in 3rd set)",
+      "last_match": "2026-04 Barcelona R1 RTD",
+      "expected_return": "OUT Madrid, OUT Rome; 'hopeful' for Roland Garros but unseeded. Defending Madrid finalist + Rome QF — drops 850 pts, projected outside top 50",
+      "source_summary": "Sky Sports, Tennishead, Tennis365, Yardbarker, Radio Jackie: Draper personally confirmed knee tendon issue, called it 'frustrating'.",
+      "betting_impact": "If he enters RG unseeded, he's a landmine for top-8 seeds in early rounds — but his own form and fitness are unproven. Draper to win RG match wagers should be priced like a returning player, not a top-7 — value on his opponent in R1 if drawn against a clay-comfortable mid-tier (Tabilo, Cerundolo type)."
+    },
+    {
+      "tour": "atp",
+      "name": "Taylor Fritz",
+      "rank": 4,
+      "issue": "knee tendonitis, ongoing since early 2026",
+      "first_reported": "2026-Q1",
+      "last_match": "Pre-Madrid (sat Madrid out)",
+      "expected_return": "OUT Monte Carlo, OUT Munich, OUT Madrid; Rome status unclear but trending negative; RG questionable",
+      "source_summary": "Tennishead, Tennisuptodate: Fritz cited continued knee tendonitis recovery in Madrid withdrawal statement.",
+      "betting_impact": "Fritz on clay is already a fade; injured Fritz on clay is a hard fade. If he enters Rome rusty, opening-round opponent is live. RG futures at any meaningful price are poor — he hasn't played a clay match in 2026."
+    },
+    {
+      "tour": "atp",
+      "name": "Arthur Fils",
+      "rank": null,
+      "issue": "lower back stress fracture (recurrence/management); withdrew Monte Carlo",
+      "first_reported": "Stress fracture initially May 2025; recurrence forced Monte Carlo 2026 withdrawal",
+      "last_match": "Pre-Monte Carlo",
+      "expected_return": "Status fluid; reached Doha SF, Indian Wells QF, Miami SF, Qatar F earlier in 2026 — body holding then breaking down again",
+      "source_summary": "ATP Tour, Yahoo Sports, Tennis Gazette: 'I can't tell myself I will never have back pain again.' Withdrew Monte Carlo as 5th highly-ranked withdrawal.",
+      "betting_impact": "Back issues + heavy clay grinding = serial fade in 3-set situations. If he plays Rome/RG, take opponent in any match scheduled day-after-day. Live unders on his match games when he's serving second set."
+    },
+    {
+      "tour": "atp",
+      "name": "Jakub Mensik",
+      "rank": null,
+      "issue": "toe injury (delayed clay start) — appears managed",
+      "first_reported": "2026-03/04",
+      "last_match": "Madrid R4 vs Zverev (lost 4-6 7-6(4) 3-6)",
+      "expected_return": "Active in Madrid; played deep into draw; likely Rome/RG full participation",
+      "source_summary": "ATP Tour Madrid recap; Mensik 'looked solid' despite toe — Miami champion.",
+      "betting_impact": "Probably mostly priced in. But 20yo with a toe issue grinding through clay = monitor for set-3 fade angles in best-of-5 RG."
+    },
+    {
+      "tour": "atp",
+      "name": "Sebastian Korda",
+      "rank": null,
+      "issue": "undisclosed; withdrew Monte Carlo and Madrid",
+      "first_reported": "2026-04",
+      "last_match": "Pre-Monte Carlo",
+      "expected_return": "Unclear; missed both 1000s of clay swing",
+      "source_summary": "SI, Tennis Tour Calendar withdrawal lists.",
+      "betting_impact": "Treat as untested entering Rome/RG. Fade in any short-price spot."
+    },
+    {
+      "tour": "atp",
+      "name": "Frances Tiafoe",
+      "rank": null,
+      "issue": "withdrew from Madrid (reason not specified in pulled sources)",
+      "first_reported": "2026-04",
+      "last_match": "Pre-Madrid",
+      "expected_return": "Rome TBC",
+      "source_summary": "ATP Tour Madrid coverage notes Tiafoe and Korda withdrew, opening bracket.",
+      "betting_impact": "Tiafoe already an inconsistent claycourter; layoff worsens it. Fade vs anyone with clay reps."
+    },
+    {
+      "tour": "wta",
+      "name": "Iga Swiatek",
+      "rank": 4,
+      "issue": "viral illness — dizziness, blurred vision, 'zero energy, zero stability'",
+      "first_reported": "2026-04-25 (felt symptoms 48h before retirement)",
+      "last_match": "2026-04-26 Madrid R3 RTD vs Ann Li, trailing 6-7(4) 6-2 0-3",
+      "expected_return": "Rome (May 6) likely if virus clears; RG full participation expected",
+      "source_summary": "WTA, Ubitennis, Tennisuptodate, Tennis365: Swiatek tearful, doctor checked vitals on court. Multi-day virus.",
+      "betting_impact": "Highest-edge spot if she enters Rome early. Markets price her at near-favorite on clay regardless. If she's listed in Rome R1 within 7 days of Madrid retirement, opponent is value — virus recovery + clay grinding + best-of-3 don't recover that fast. Watch her practice reports out of Rome."
+    },
+    {
+      "tour": "wta",
+      "name": "Madison Keys",
+      "rank": 17,
+      "issue": "illness (unspecified)",
+      "first_reported": "2026-04-24",
+      "last_match": "Withdrew before Madrid R2",
+      "expected_return": "Rome questionable",
+      "source_summary": "WTA, Justwomenssports, Tennishead: pulled out hours before opener; replaced by Anastasia Potapova.",
+      "betting_impact": "Insufficient info; treat any Rome match as live opponent value if she enters within a week."
+    },
+    {
+      "tour": "wta",
+      "name": "Clara Tauson",
+      "rank": 18,
+      "issue": "shoulder injury",
+      "first_reported": "2026-04-24",
+      "last_match": "Withdrew before Madrid opener vs Siniakova",
+      "expected_return": "Unclear; shoulder issues on a big-serving player are slow",
+      "source_summary": "Tennis365, WTA: Tauson was world No.18 seed, replaced by Blinkova.",
+      "betting_impact": "Fade serve-reliant Tauson into Rome/RG until she plays a tune-up match. Her serve % is everything; injured shoulder = first-serve drop = under-priced opponent on serve-hold markets."
+    },
+    {
+      "tour": "wta",
+      "name": "Amanda Anisimova",
+      "rank": 6,
+      "issue": "injury (also pulled out of Charleston in same window)",
+      "first_reported": "2026-04 (Charleston withdrawal then Madrid)",
+      "last_match": "Pre-Madrid",
+      "expected_return": "Rome TBC",
+      "source_summary": "WTA, Tennistemple: seeded withdrawal from Madrid alongside Alexandrova.",
+      "betting_impact": "Top-10 player skipping a 1000 = fitness flag. If listed in Rome short-priced, fade until she shows movement."
+    },
+    {
+      "tour": "wta",
+      "name": "Ekaterina Alexandrova",
+      "rank": null,
+      "issue": "injury (unspecified)",
+      "first_reported": "2026-04",
+      "last_match": "Pre-Madrid",
+      "expected_return": "Rome TBC",
+      "source_summary": "WTA Madrid withdrawal notice.",
+      "betting_impact": "Standard returning-from-injury fade until she plays a match."
+    },
+    {
+      "tour": "wta",
+      "name": "Liudmila Samsonova",
+      "rank": 20,
+      "issue": "illness",
+      "first_reported": "2026-04-26",
+      "last_match": "Withdrew before Madrid R3 vs Linda Noskova",
+      "expected_return": "Rome questionable (10-day window)",
+      "source_summary": "Tennis365: 30th withdrawal of Madrid event.",
+      "betting_impact": "If she plays Rome, fade in opener — illness recovery + clay = poor prep."
+    },
+    {
+      "tour": "wta",
+      "name": "Karolina Muchova",
+      "rank": null,
+      "issue": "workload management post-Stuttgart final + lingering injury history (wrist/forearm previously)",
+      "first_reported": "2026-04-21",
+      "last_match": "Stuttgart F (lost to Rybakina)",
+      "expected_return": "Rome likely",
+      "source_summary": "Tennis.com, Tennisuptodate: cited illness in some reports, workload in others. Body of work suggests both.",
+      "betting_impact": "Muchova always one match from a withdrawal. Live-betting opponent in 3rd set is the historical edge."
+    },
+    {
+      "tour": "wta",
+      "name": "Emma Raducanu",
+      "rank": null,
+      "issue": "viral illness (lingering since February Middle East swing)",
+      "first_reported": "2026-02",
+      "last_match": "Indian Wells 2026 (last appearance)",
+      "expected_return": "Rome unclear; targeting RG",
+      "source_summary": "EssentiallySports, Tennis365: hasn't played since IW; missed entire clay swing through Madrid.",
+      "betting_impact": "RG opener is a coin-flip-or-worse for opponents at any price; she'll be a sentimental favorite but priced wrong. Hammer the opponent in any first-round RG match if Raducanu is the public side."
+    },
+    {
+      "tour": "wta",
+      "name": "Barbora Krejcikova",
+      "rank": null,
+      "issue": "left thigh injury (since Indian Wells)",
+      "first_reported": "2026-03 IW",
+      "last_match": "Indian Wells 2026",
+      "expected_return": "Rome unlikely; RG questionable",
+      "source_summary": "Tennistemple, Madrid withdrawal coverage.",
+      "betting_impact": "Fade hard. Movement-dependent player with chronic body issues, no clay reps."
+    },
+    {
+      "tour": "wta",
+      "name": "Marketa Vondrousova",
+      "rank": null,
+      "issue": "shoulder (since January, 4th consecutive WTA 1000 missed)",
+      "first_reported": "2026-01",
+      "last_match": "Pre-Australian Open",
+      "expected_return": "Rome unlikely; RG TBC",
+      "source_summary": "Tennistemple Madrid withdrawal article.",
+      "betting_impact": "Lefty serve depends on shoulder; if she returns, fade until match-tested. Opponent moneyline value."
+    },
+    {
+      "tour": "wta",
+      "name": "Emma Navarro",
+      "rank": null,
+      "issue": "ongoing illness",
+      "first_reported": "2026-04",
+      "last_match": "Pre-Madrid",
+      "expected_return": "Rome TBC",
+      "source_summary": "Tennistemple, EssentiallySports.",
+      "betting_impact": "Standard illness-return fade."
+    },
+    {
+      "tour": "wta",
+      "name": "Coco Gauff",
+      "rank": 3,
+      "issue": "stomach illness mid-Madrid — vomited courtside vs Cirstea, then nearly lost to Noskova next round",
+      "first_reported": "2026-04-26",
+      "last_match": "Madrid R16 (per Noskova escape coverage)",
+      "expected_return": "Active but fitness compromised",
+      "source_summary": "WTA, profootballnetwork: 'I was trying not to throw up on court.' Recovered to win that match but Noskova R16 was a near-loss.",
+      "betting_impact": "INFERRED: Gauff's level dropped noticeably across Madrid. If she plays Rome immediately after, fatigue/illness carryover is real. Underpriced opponents in early Rome rounds. Live-bet against in second set if she drops first."
+    }
+  ],
+  "recent_marathons": [
+    {
+      "tour": "wta",
+      "name": "Aryna Sabalenka",
+      "match": "Madrid R16 vs Naomi Osaka — survived from a set and break down",
+      "date": "2026-04-27",
+      "minutes": null,
+      "fatigue_risk": "MODERATE — Sabalenka playing back-to-back days into QF/SF; Osaka match featured a 7-deuce game at 3-3, suggesting heavy physical exchange. Inferred fatigue carryover."
+    },
+    {
+      "tour": "wta",
+      "name": "Naomi Osaka",
+      "match": "Madrid R16 vs Sabalenka (loss after leading set + break)",
+      "date": "2026-04-27",
+      "minutes": null,
+      "fatigue_risk": "Low — eliminated, gets recovery week"
+    },
+    {
+      "tour": "wta",
+      "name": "Mirra Andreeva",
+      "match": "Madrid R16 vs Bondar — won deciding TB after blowing 5-1 third-set lead; then QF vs Fernandez also went the distance",
+      "date": "2026-04-27 / 2026-04-28",
+      "minutes": null,
+      "fatigue_risk": "HIGH — back-to-back three-setters into Madrid SF. 18yo with heavy minutes accumulated. Fade in SF/F if listed short."
+    },
+    {
+      "tour": "wta",
+      "name": "Coco Gauff",
+      "match": "Madrid R32 vs Cirstea (illness, 4-6 7-5 6-1) and R16 vs Noskova (escape)",
+      "date": "2026-04-26 / 2026-04-27",
+      "minutes": null,
+      "fatigue_risk": "HIGH — illness + two grueling 3-setters. Carryover into Rome very likely."
+    },
+    {
+      "tour": "wta",
+      "name": "Elena Rybakina",
+      "match": "Madrid R16 vs Zheng Qinwen — 4-6 6-4 6-3, 2h21m",
+      "date": "2026-04-27",
+      "minutes": 141,
+      "fatigue_risk": "MODERATE — then upset by Potapova in midnight QF, suggesting fatigue from Zheng match was real"
+    }
+  ],
+  "extended_absences_returning": [
+    {
+      "name": "Holger Rune",
+      "tour": "atp",
+      "absence": "Oct 2025 - May 2026 (~7 months)",
+      "return_event": "Hamburg ATP 500, May 17-23"
+    },
+    {
+      "name": "Marketa Vondrousova",
+      "tour": "wta",
+      "absence": "Jan 2026 - present (~4 months)",
+      "return_event": "TBD, post-Madrid"
+    },
+    {
+      "name": "Emma Raducanu",
+      "tour": "wta",
+      "absence": "March 2026 - present (~7 weeks; full clay swing missed)",
+      "return_event": "Rome or RG"
+    }
+  ],
+  "tournament_status_summary": {
+    "madrid_2026_withdrawals_total": "31 across both tours (per Tennis365 tally Apr 26-27)",
+    "monte_carlo_2026_withdrawals_total": "11 ATP",
+    "rome_2026_questionable": ["Djokovic", "Fritz", "Mensik (probable)", "Swiatek (illness rebound)", "Keys", "Tauson", "Anisimova", "Samsonova", "Muchova", "Krejcikova", "Vondrousova", "Navarro", "Raducanu"],
+    "roland_garros_2026_confirmed_out": ["Carlos Alcaraz (wrist)"],
+    "roland_garros_2026_questionable": ["Djokovic (shoulder)", "Draper (knee)", "Fritz (knee)", "Rune (Achilles comeback)", "Krejcikova (thigh)", "Vondrousova (shoulder)"]
+  },
+  "notes": [
+    "Sources: ATP Tour, WTA Tour, Tennis.com, Tennis365, Tennisuptodate, Ubitennis, Puntodebreak, Tennistemple, ProFootballNetwork, EssentiallySports, Tennishead, Yardbarker, beIN, SI, Sky Sports.",
+    "Inferred items flagged in betting_impact text. Confirmed reporting otherwise.",
+    "Madrid 2026 still in progress as of 2026-04-29 (QF/SF stage)."
+  ]
+}

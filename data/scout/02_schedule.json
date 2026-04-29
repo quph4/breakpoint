@@ -1,0 +1,370 @@
+{
+  "as_of": "2026-04-29",
+  "window": {
+    "start": "2026-04-29",
+    "end": "2026-05-18"
+  },
+  "scout": "02_schedule",
+  "notes": [
+    "Window covers the back half of Madrid (M1000+W1000), the entire Rome fortnight (M1000+W1000), and surrounding clay Challengers / WTA 125s.",
+    "There is no ATP 250 between Madrid and Rome on the 2026 calendar — the men's tour goes straight from Madrid (ends May 3) into Rome qualifying (starts ~May 4). Geneva and Hamburg ATP 250s sit outside this window (May 17+).",
+    "Prize money for Rome 2026 not yet officially published as of 2026-04-29; combined 2025 pool was ~€14.06M (ATP €8.06M + WTA $6.91M). Field placeholder uses 2025 baseline flagged as estimate.",
+    "Some seed orderings cross-validated across ATP.com, Wikipedia, perfect-tennis, and tennisuptodate. Where sources disagreed (e.g., Madrid WTA seed 6/7), the WTA Official page list was preferred."
+  ],
+  "tournaments": [
+    {
+      "name": "Mutua Madrid Open",
+      "tour": "ATP+WTA",
+      "category": "M1000+WTA1000",
+      "location": "Madrid, Spain",
+      "venue": "Caja Mágica / Park Manzanares",
+      "surface": "Clay",
+      "indoor": false,
+      "altitude_m": 667,
+      "altitude_note": "High altitude — ball flies, favors big servers and flat hitters historically.",
+      "start": "2026-04-21",
+      "end": "2026-05-03",
+      "status_on_2026_04_29": "in_progress (round of 16 / quarterfinals stage)",
+      "draw_size": {"atp": 96, "wta": 96},
+      "prize_money_eur": {"atp": 8235540, "wta": 8235540, "singles_champion": 1007165},
+      "prize_money_usd_est": 8800000,
+      "top_seeds": {
+        "atp": [
+          {"seed": 1, "name": "Jannik Sinner", "country": "ITA"},
+          {"seed": 2, "name": "Alexander Zverev", "country": "GER"},
+          {"seed": 3, "name": "Félix Auger-Aliassime", "country": "CAN"},
+          {"seed": 4, "name": "Ben Shelton", "country": "USA"},
+          {"seed": 5, "name": "Alex de Minaur", "country": "AUS"},
+          {"seed": 6, "name": "Lorenzo Musetti", "country": "ITA"},
+          {"seed": 7, "name": "Daniil Medvedev", "country": "RUS"},
+          {"seed": 8, "name": "Casper Ruud", "country": "NOR", "confidence": "inferred_from_ranking_top10_minus_absences"}
+        ],
+        "wta": [
+          {"seed": 1, "name": "Aryna Sabalenka", "country": "BLR"},
+          {"seed": 2, "name": "Elena Rybakina", "country": "KAZ"},
+          {"seed": 3, "name": "Coco Gauff", "country": "USA"},
+          {"seed": 4, "name": "Iga Świątek", "country": "POL"},
+          {"seed": 5, "name": "Jessica Pegula", "country": "USA"},
+          {"seed": 6, "name": "Amanda Anisimova", "country": "USA", "confidence": "cross_referenced_with_rome_seeding"},
+          {"seed": 7, "name": "Elina Svitolina", "country": "UKR"},
+          {"seed": 8, "name": "Jasmine Paolini", "country": "ITA"}
+        ]
+      },
+      "notable_storylines": [
+        "Sinner chasing fifth straight Masters 1000 title and his maiden Madrid crown.",
+        "Sabalenka chasing record fourth Madrid singles title.",
+        "Mirra Andreeva (seed 9) already through to QF as of the as_of date — proven Madrid form.",
+        "Rybakina vs Zheng went three sets in the third round; Potapova upset Rybakina in a midnight QF — bracket has cracked open on the bottom half.",
+        "Naomi Osaka returned and is seeded 14; Venus Williams in the field on a wildcard run."
+      ],
+      "absences": [
+        {"player": "Carlos Alcaraz", "tour": "ATP", "reason": "Wrist injury (suffered at Barcelona Open); second straight Madrid miss"},
+        {"player": "Novak Djokovic", "tour": "ATP", "reason": "Skipped (scheduling — targeting Rome/Roland-Garros)"},
+        {"player": "Taylor Fritz", "tour": "ATP", "reason": "Knee injury"},
+        {"player": "Jack Draper", "tour": "ATP", "reason": "Withdrew — physical"},
+        {"player": "Sebastian Korda", "tour": "ATP", "reason": "Withdrew"},
+        {"player": "Frances Tiafoe", "tour": "ATP", "reason": "Withdrew"},
+        {"player": "Holger Rune", "tour": "ATP", "reason": "Targeting Rome return instead"},
+        {"player": "Emma Raducanu", "tour": "WTA", "reason": "Withdrew — part of 17-player withdrawal wave reported pre-tournament"}
+      ],
+      "data_quality": {
+        "dates": "confirmed",
+        "seeds_atp_top5": "confirmed",
+        "seeds_atp_6_8": "high_confidence",
+        "seeds_wta": "high_confidence",
+        "prize_money": "confirmed",
+        "absences": "confirmed_multiple_sources"
+      }
+    },
+    {
+      "name": "Internazionali BNL d'Italia (Italian Open / Rome Masters)",
+      "tour": "ATP+WTA",
+      "category": "M1000+WTA1000",
+      "location": "Rome, Italy",
+      "venue": "Foro Italico",
+      "surface": "Clay",
+      "indoor": false,
+      "altitude_m": 21,
+      "altitude_note": "Sea-level red clay — slower, heavier conditions than Madrid. Court speed historically penalizes pure power hitters and rewards heavy topspin.",
+      "start": "2026-05-05",
+      "end": "2026-05-17",
+      "draw_start_detail": {
+        "wta_main_draw": "2026-05-05",
+        "atp_main_draw": "2026-05-06",
+        "finals_weekend": "2026-05-16 to 2026-05-17"
+      },
+      "draw_size": {"atp": 96, "wta": 96},
+      "prize_money_eur_estimate": 14500000,
+      "prize_money_note": "2026 figures not yet published; 2025 combined ~€14.06M. ATP and WTA each typically ~€7M+ at this event.",
+      "top_seeds": {
+        "atp": [
+          {"seed": 1, "name": "Jannik Sinner", "country": "ITA"},
+          {"seed": 2, "name": "Alexander Zverev", "country": "GER"},
+          {"seed": 3, "name": "Novak Djokovic", "country": "SRB"},
+          {"seed": 4, "name": "Félix Auger-Aliassime", "country": "CAN"},
+          {"seed": 5, "name": "Ben Shelton", "country": "USA"},
+          {"seed": 6, "name": "Alex de Minaur", "country": "AUS"},
+          {"seed": 7, "name": "Daniil Medvedev", "country": "RUS"},
+          {"seed": 8, "name": "Lorenzo Musetti", "country": "ITA"}
+        ],
+        "wta": [
+          {"seed": 1, "name": "Aryna Sabalenka", "country": "BLR"},
+          {"seed": 2, "name": "Elena Rybakina", "country": "KAZ"},
+          {"seed": 3, "name": "Coco Gauff", "country": "USA"},
+          {"seed": 4, "name": "Iga Świątek", "country": "POL"},
+          {"seed": 5, "name": "Jessica Pegula", "country": "USA"},
+          {"seed": 6, "name": "Amanda Anisimova", "country": "USA"},
+          {"seed": 7, "name": "Elina Svitolina", "country": "UKR"},
+          {"seed": 8, "name": "Mirra Andreeva", "country": "RUS"}
+        ],
+        "seeding_note": "ATP seeds based on rankings as of 4 May 2026 (live rankings as of 28 April used as projection). WTA seedings based on rankings as of 20 April 2026."
+      },
+      "notable_storylines": [
+        "Djokovic's first event of the European clay swing in 2026 — his Roland-Garros prep starts here.",
+        "Holger Rune targeting Rome as comeback event after skipping Madrid.",
+        "Jasmine Paolini home favorite on the WTA side; Italian crowd factor.",
+        "Sinner chasing back-to-back Masters titles on home soil; pressure cooker."
+      ],
+      "absences": [
+        {"player": "Carlos Alcaraz", "tour": "ATP", "reason": "Wrist injury — defending 2025 champion, also out of Roland-Garros"},
+        {"player": "Taylor Fritz", "tour": "ATP", "reason": "Knee injury"}
+      ],
+      "notable_first_round_matches": [],
+      "data_quality": {
+        "dates": "confirmed",
+        "seeds_atp_top8": "confirmed_via_wikipedia",
+        "seeds_wta_top8": "confirmed_via_wikipedia",
+        "prize_money": "estimated_from_2025",
+        "absences": "confirmed",
+        "first_round_matches": "draw_finalized_2026-05-04 — not yet available as of as_of"
+      }
+    },
+    {
+      "name": "Open Aix Provence Crédit Agricole",
+      "tour": "ATP_Challenger",
+      "category": "Challenger_175",
+      "location": "Aix-en-Provence, France",
+      "surface": "Clay",
+      "indoor": false,
+      "start": "2026-04-27",
+      "end": "2026-05-03",
+      "draw_size": {"atp": 48},
+      "prize_money_eur": null,
+      "notable_field": ["Stan Wawrinka", "Grigor Dimitrov"],
+      "notes": "CH175 alongside Cagliari — primary catch-net for ATP players who lost early at Madrid or didn't make the cut. Strong veteran field this year.",
+      "data_quality": {"dates": "confirmed", "field": "confirmed_partial"}
+    },
+    {
+      "name": "Sardegna Open",
+      "tour": "ATP_Challenger",
+      "category": "Challenger_175",
+      "location": "Cagliari, Italy",
+      "surface": "Clay",
+      "indoor": false,
+      "start": "2026-04-27",
+      "end": "2026-05-03",
+      "draw_size": {"atp": 48},
+      "notable_field": ["Matteo Berrettini"],
+      "notes": "Berrettini through early rounds. Italian comeback storyline.",
+      "data_quality": {"dates": "confirmed", "field": "confirmed_partial"}
+    },
+    {
+      "name": "Catalonia Open Solgironès",
+      "tour": "WTA_125",
+      "category": "WTA125",
+      "location": "La Bisbal d'Empordà, Spain",
+      "surface": "Clay",
+      "indoor": false,
+      "start": "2026-04-27",
+      "end": "2026-05-03",
+      "notes": "Runs in parallel with Madrid — catch-all for WTA players who lost early or didn't enter the 1000.",
+      "data_quality": {"dates": "week_confirmed_exact_dates_inferred"}
+    },
+    {
+      "name": "L'Open 35 de Saint-Malo",
+      "tour": "WTA_125",
+      "category": "WTA125",
+      "location": "Saint-Malo, France",
+      "surface": "Clay",
+      "indoor": false,
+      "start": "2026-04-27",
+      "end": "2026-05-03",
+      "data_quality": {"dates": "week_confirmed_exact_dates_inferred"}
+    },
+    {
+      "name": "Huzhou Open",
+      "tour": "WTA_125",
+      "category": "WTA125",
+      "location": "Huzhou, China",
+      "surface": "Clay",
+      "indoor": false,
+      "start": "2026-04-27",
+      "end": "2026-05-03",
+      "notes": "Asian outpost of the clay swing — separate ecosystem from European entry lists.",
+      "data_quality": {"dates": "week_confirmed"}
+    },
+    {
+      "name": "Oeiras 1",
+      "tour": "ATP_Challenger",
+      "category": "Challenger_100",
+      "location": "Oeiras, Portugal",
+      "surface": "Clay",
+      "indoor": false,
+      "start": "2026-05-04",
+      "end": "2026-05-10",
+      "notes": "First leg of back-to-back Oeiras Challengers. Standard Roland-Garros prep stop for clay grinders not seeded into Rome.",
+      "data_quality": {"dates": "high_confidence_from_itf_listing"}
+    },
+    {
+      "name": "Bengaluru Open",
+      "tour": "ATP_Challenger",
+      "category": "Challenger",
+      "location": "Bengaluru, India",
+      "surface": "Hard",
+      "indoor": false,
+      "start": "2026-05-04",
+      "end": "2026-05-10",
+      "data_quality": {"dates": "confirmed"}
+    },
+    {
+      "name": "Workday Canberra International",
+      "tour": "ATP_Challenger",
+      "category": "Challenger",
+      "location": "Canberra, Australia",
+      "surface": "Hard",
+      "indoor": false,
+      "start": "2026-05-04",
+      "end": "2026-05-10",
+      "data_quality": {"dates": "confirmed"}
+    },
+    {
+      "name": "Bangkok Open 1",
+      "tour": "ATP_Challenger",
+      "category": "Challenger",
+      "location": "Bangkok, Thailand",
+      "surface": "Hard",
+      "indoor": false,
+      "start": "2026-05-04",
+      "end": "2026-05-10",
+      "data_quality": {"dates": "confirmed"}
+    },
+    {
+      "name": "Lexus Nottingham Challenger",
+      "tour": "ATP_Challenger",
+      "category": "Challenger",
+      "location": "Nottingham, United Kingdom",
+      "surface": "Grass",
+      "indoor": false,
+      "start": "2026-05-04",
+      "end": "2026-05-10",
+      "notes": "Earliest grass event of the 2026 calendar — niche field of grass specialists prepping for Stuttgart/Queen's later in June.",
+      "data_quality": {"dates": "confirmed"}
+    },
+    {
+      "name": "Istanbul Open",
+      "tour": "WTA_125",
+      "category": "WTA125",
+      "location": "Istanbul, Turkey",
+      "surface": "Clay",
+      "indoor": false,
+      "start": "2026-05-04",
+      "end": "2026-05-10",
+      "data_quality": {"dates": "week_confirmed"}
+    },
+    {
+      "name": "Jiangxi Open",
+      "tour": "WTA_125",
+      "category": "WTA125",
+      "location": "Jiujiang, China",
+      "surface": "Hard",
+      "indoor": false,
+      "start": "2026-05-04",
+      "end": "2026-05-10",
+      "data_quality": {"dates": "week_confirmed"}
+    },
+    {
+      "name": "Oeiras 2",
+      "tour": "ATP_Challenger",
+      "category": "Challenger_75",
+      "location": "Oeiras, Portugal",
+      "surface": "Clay",
+      "indoor": false,
+      "start": "2026-05-11",
+      "end": "2026-05-17",
+      "notes": "Second leg of Oeiras back-to-back — common to see same field re-enter for back-to-back match volume on identical conditions.",
+      "data_quality": {"dates": "high_confidence_from_itf_listing"}
+    },
+    {
+      "name": "Bangkok Open 2",
+      "tour": "ATP_Challenger",
+      "category": "Challenger",
+      "location": "Bangkok, Thailand",
+      "surface": "Hard",
+      "indoor": false,
+      "start": "2026-05-11",
+      "end": "2026-05-17",
+      "data_quality": {"dates": "confirmed"}
+    },
+    {
+      "name": "AAT Challenger Edición TCA",
+      "tour": "ATP_Challenger",
+      "category": "Challenger",
+      "location": "Buenos Aires, Argentina",
+      "surface": "Clay",
+      "indoor": false,
+      "start": "2026-05-11",
+      "end": "2026-05-17",
+      "data_quality": {"dates": "confirmed", "venue_city": "high_confidence"}
+    },
+    {
+      "name": "Lexus Glasgow Challenger",
+      "tour": "ATP_Challenger",
+      "category": "Challenger",
+      "location": "Glasgow, United Kingdom",
+      "surface": "Hard_Indoor_or_Grass",
+      "indoor": null,
+      "start": "2026-05-11",
+      "end": "2026-05-17",
+      "notes": "Surface uncertain in available source — confirm before betting.",
+      "data_quality": {"dates": "confirmed", "surface": "needs_verification"}
+    },
+    {
+      "name": "Parma Ladies Open (Emilia-Romagna Open)",
+      "tour": "WTA_125",
+      "category": "WTA125",
+      "location": "Parma, Italy",
+      "surface": "Clay",
+      "indoor": false,
+      "start": "2026-05-11",
+      "end": "2026-05-16",
+      "notes": "Runs concurrent with Rome — entries fluid based on Rome Round 1 results. Watch for Rome qualifying losers dropping in late.",
+      "data_quality": {"dates": "high_confidence"}
+    },
+    {
+      "name": "Trophée Clarins",
+      "tour": "WTA_125",
+      "category": "WTA125",
+      "location": "Paris, France",
+      "surface": "Clay",
+      "indoor": false,
+      "start": "2026-05-11",
+      "end": "2026-05-17",
+      "notes": "Roland-Garros tune-up on the actual Roland-Garros clay ecosystem (Paris area). Strong WTA 125 field historically.",
+      "data_quality": {"dates": "high_confidence"}
+    }
+  ],
+  "sources": [
+    "https://www.atptour.com/en/news/madrid-2026-atp-masters-1000-history-draw-schedule",
+    "https://en.wikipedia.org/wiki/2026_Mutua_Madrid_Open",
+    "https://en.wikipedia.org/wiki/2026_Italian_Open",
+    "https://www.lta.org.uk/news/italian-open-2026-preview-draws-player-list-and-how-to-watch/",
+    "https://www.atptour.com/en/news/2026-atp-tour-calendar-announced",
+    "https://en.wikipedia.org/wiki/2026_WTA_Tour",
+    "https://en.wikipedia.org/wiki/2026_WTA_125_tournaments",
+    "https://en.wikipedia.org/wiki/2026_ATP_Challenger_Tour",
+    "https://www.tennis365.com/tennis-features/madrid-open-2026-withdrawal-list-emma-raducanu-carlos-alcaraz-novak-djokovic",
+    "https://tennisuptodate.com/atp/taylor-fritz-joins-alcaraz-and-djokovic-in-madrid-open-withdrawal-wave",
+    "https://www.perfect-tennis.com/prize-money/madrid/",
+    "https://www.perfect-tennis.com/prize-money/rome/"
+  ]
+}

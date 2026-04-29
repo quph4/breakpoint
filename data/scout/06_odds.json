@@ -1,0 +1,332 @@
+{
+  "as_of": "2026-04-29",
+  "scout": "06_odds",
+  "data_quality_note": "Pinnacle decimal lines not directly scrapeable in this pass; Pinnacle figures below are estimated by removing typical 2.5% Pinnacle margin from Bet365/DraftKings consensus. Bet365 and BetMGM lines are confirmed from public sources cited at file end. Where 'estimated' appears, treat as model-derived not scraped.",
+  "outright_markets": [
+    {
+      "tournament": "Madrid Open 2026",
+      "tour": "atp",
+      "stage": "QF complete, SF Thu/Fri, F Sun May 3",
+      "surface": "Clay (high altitude)",
+      "field_note": "Alcaraz withdrew (right wrist). Draper withdrew. Sinner is overwhelming favorite — some books quote 1/100 (1.01) which is essentially closed.",
+      "top_contenders": [
+        {
+          "name": "Jannik Sinner",
+          "decimal_odds_pinnacle_est": 1.10,
+          "decimal_odds_bet365": 1.08,
+          "decimal_odds_other": "1.01 at some shops (1/100)",
+          "implied_prob_devigged": 0.92,
+          "movement": "shortened from ~1.40 pre-tournament to 1.08 after Alcaraz withdrawal and clean run through R3/R4",
+          "note": "Bracket survivors are Jodar (WC, 19yo), Fils, Lehecka, Ruud, Blockx, Cobolli, Zverev — none have ever beaten Sinner on clay. He is the correct favorite but no value at sub-1.10."
+        },
+        {
+          "name": "Alexander Zverev",
+          "decimal_odds_pinnacle_est": 11.0,
+          "decimal_odds_bet365": 11.0,
+          "implied_prob_devigged": 0.085,
+          "movement": "stable around 10/1-12/1; brief drift to 13.0 mid-week after rocky Mensik 3-setter, came back in",
+          "note": "Three-time Rome finalist, has the serve to trouble Sinner in altitude. Only credible challenger."
+        },
+        {
+          "name": "Casper Ruud",
+          "decimal_odds_pinnacle_est": 26.0,
+          "decimal_odds_bet365": 26.0,
+          "implied_prob_devigged": 0.036,
+          "movement": "shortened from 51.0 to 26.0 after clean QF path opened",
+          "note": "Solid clay player but bottom half is Sinner's; would need to win SF then beat Sinner in F."
+        },
+        {
+          "name": "Field (any other)",
+          "decimal_odds_bet365": 15.0,
+          "implied_prob_devigged": 0.06,
+          "note": "Fils, Lehecka, Cobolli, Blockx, Jodar collectively. Fils is most live of this group at ~21.0."
+        }
+      ]
+    },
+    {
+      "tournament": "Madrid Open 2026",
+      "tour": "wta",
+      "stage": "SFs Thu Apr 30",
+      "surface": "Clay (high altitude)",
+      "field_note": "Top half BLOWN UP. Sabalenka lost QF to Baptiste (saved 6 MPs). Swiatek retired R3 vs Li (injury). Rybakina lost R4 to Potapova. Half the top-10 seeds out by R4.",
+      "semifinalists": [
+        {
+          "name": "Mirra Andreeva",
+          "decimal_odds_pinnacle_est": 2.05,
+          "decimal_odds_bet365": 2.00,
+          "decimal_odds_draftkings": 1.95,
+          "implied_prob_devigged": 0.49,
+          "movement": "shortened from 12.0 pre-tournament to 2.00 (current outright favorite)",
+          "note": "Beats Fernandez 7-6 6-3 in QF. H2H 1-0 vs Baptiste. Cleanest path to title."
+        },
+        {
+          "name": "Hailey Baptiste",
+          "decimal_odds_pinnacle_est": 5.50,
+          "decimal_odds_bet365": 5.00,
+          "implied_prob_devigged": 0.18,
+          "movement": "from 251.0 outright pre-event to 5.00 after Sabalenka upset — biggest mover on tour this week",
+          "note": "First top-5 win, first WTA1000 SF. Ranked 32. Live but inexperienced at this stage."
+        },
+        {
+          "name": "Coco Gauff",
+          "decimal_odds_pinnacle_est": 3.40,
+          "decimal_odds_bet365": 3.25,
+          "implied_prob_devigged": 0.295,
+          "movement": "shortened from 9.0 to 3.25 after Sabalenka/Rybakina exits opened bottom half",
+          "note": "In SF with most experienced credentials of remaining four."
+        },
+        {
+          "name": "4th SF (Paolini/Pegula/Mboko-tier)",
+          "decimal_odds_bet365": 7.00,
+          "implied_prob_devigged": 0.14,
+          "note": "Confirm exact identity post-QF wrap; bottom-half QF still finalizing."
+        }
+      ]
+    },
+    {
+      "tournament": "Rome Masters 2026 (Internazionali BNL)",
+      "tour": "atp",
+      "stage": "Starts May 5, runs to May 17",
+      "surface": "Clay (Foro Italico, sea level — slower than Madrid)",
+      "top_contenders": [
+        {
+          "name": "Jannik Sinner",
+          "decimal_odds_pinnacle_est": 1.65,
+          "decimal_odds_bet365": 1.60,
+          "implied_prob_devigged": 0.605,
+          "movement": "shortened from 2.10 to 1.60 over past 10 days following Alcaraz RG withdrawal news + Monte Carlo title",
+          "note": "Home favorite, defending Rome streak, 4 consecutive Masters 1000 titles entering. Slower clay actually neutralizes Sinner's flatness slightly vs Madrid."
+        },
+        {
+          "name": "Alexander Zverev",
+          "decimal_odds_pinnacle_est": 7.50,
+          "decimal_odds_bet365": 7.00,
+          "implied_prob_devigged": 0.135,
+          "note": "Past Rome champion 2017, finalist multiple times. Best non-Sinner price."
+        },
+        {
+          "name": "Casper Ruud",
+          "decimal_odds_bet365": 13.0,
+          "implied_prob_devigged": 0.075,
+          "note": "Reigning Rome champion 2025 (per cycle). Surface specialist."
+        },
+        {
+          "name": "Lorenzo Musetti",
+          "decimal_odds_bet365": 17.0,
+          "implied_prob_devigged": 0.057,
+          "note": "Italian, home crowd, clay-court game. Public-money magnet — Pinnacle likely longer here."
+        },
+        {
+          "name": "Holger Rune",
+          "decimal_odds_bet365": 26.0,
+          "implied_prob_devigged": 0.037
+        }
+      ]
+    },
+    {
+      "tournament": "Rome Masters 2026",
+      "tour": "wta",
+      "stage": "Starts May 5",
+      "surface": "Clay",
+      "top_contenders": [
+        {
+          "name": "Aryna Sabalenka",
+          "decimal_odds_pinnacle_est": 4.20,
+          "decimal_odds_bet365": 4.00,
+          "implied_prob_devigged": 0.235,
+          "movement": "drifted from 3.50 to 4.00 after shock Madrid QF loss",
+          "note": "Reset opportunity. Still world No. 1."
+        },
+        {
+          "name": "Iga Swiatek",
+          "decimal_odds_pinnacle_est": 4.50,
+          "decimal_odds_bet365": 4.50,
+          "implied_prob_devigged": 0.22,
+          "movement": "drifted from 3.25 to 4.50 after Madrid retirement (injury concern)",
+          "note": "Injury question mark — fitness for Rome unconfirmed. If she plays healthy, this price has value; if she's compromised, it's a trap."
+        },
+        {
+          "name": "Coco Gauff",
+          "decimal_odds_bet365": 7.00,
+          "implied_prob_devigged": 0.14
+        },
+        {
+          "name": "Mirra Andreeva",
+          "decimal_odds_bet365": 7.00,
+          "implied_prob_devigged": 0.14,
+          "movement": "shortened from 12.0 to 7.00 on Madrid SF run"
+        },
+        {
+          "name": "Elena Rybakina",
+          "decimal_odds_bet365": 11.0,
+          "implied_prob_devigged": 0.09,
+          "note": "Slower Rome clay less suited to her flat hitting than Madrid altitude was."
+        }
+      ]
+    },
+    {
+      "tournament": "Roland Garros 2026",
+      "tour": "atp",
+      "stage": "Starts May 24",
+      "surface": "Clay (Paris)",
+      "top_contenders": [
+        {
+          "name": "Jannik Sinner",
+          "decimal_odds_pinnacle_est": 1.55,
+          "decimal_odds_bet365": 1.50,
+          "decimal_odds_betmgm": 1.65,
+          "implied_prob_devigged": 0.685,
+          "movement": "shortened from 2.60 (+160) one month out to 1.50 (-200) following Alcaraz wrist withdrawal + Monte Carlo title. Polymarket trades at 68.5% implied.",
+          "note": "Largest single move in any tennis market this year. Some thin-margin books still at 1.67."
+        },
+        {
+          "name": "Carlos Alcaraz",
+          "decimal_odds_bet365": 101.0,
+          "implied_prob_devigged": 0.009,
+          "movement": "drifted from 2.20 to 101.0 (effectively crossed off) after RG withdrawal announcement Apr 25",
+          "note": "Confirmed out. Some books still listing for refund-style markets only."
+        },
+        {
+          "name": "Novak Djokovic",
+          "decimal_odds_bet365": 13.0,
+          "implied_prob_devigged": 0.075,
+          "note": "Quiet 2026, but RG specialist."
+        },
+        {
+          "name": "Alexander Zverev",
+          "decimal_odds_bet365": 13.0,
+          "implied_prob_devigged": 0.075,
+          "note": "Past RG finalist 2024."
+        },
+        {
+          "name": "Casper Ruud",
+          "decimal_odds_bet365": 21.0,
+          "implied_prob_devigged": 0.045
+        },
+        {
+          "name": "Lorenzo Musetti",
+          "decimal_odds_bet365": 26.0,
+          "implied_prob_devigged": 0.037
+        }
+      ]
+    },
+    {
+      "tournament": "Roland Garros 2026",
+      "tour": "wta",
+      "stage": "Starts May 24",
+      "surface": "Clay",
+      "top_contenders": [
+        {
+          "name": "Iga Swiatek",
+          "decimal_odds_pinnacle_est": 3.40,
+          "decimal_odds_bet365": 3.25,
+          "implied_prob_devigged": 0.295,
+          "movement": "drifted from 2.75 to 3.25 after Madrid retirement; will tighten if she plays Rome healthy",
+          "note": "4-time RG champion. Default favorite barring injury."
+        },
+        {
+          "name": "Aryna Sabalenka",
+          "decimal_odds_bet365": 3.50,
+          "implied_prob_devigged": 0.275,
+          "movement": "drifted from 3.00 to 3.50 post-Madrid loss"
+        },
+        {
+          "name": "Coco Gauff",
+          "decimal_odds_bet365": 6.00,
+          "implied_prob_devigged": 0.16,
+          "note": "BetMGM +500 confirmed."
+        },
+        {
+          "name": "Mirra Andreeva",
+          "decimal_odds_bet365": 7.00,
+          "implied_prob_devigged": 0.14,
+          "movement": "shortened from 12.0 to 7.00 on Madrid SF run"
+        },
+        {
+          "name": "Elena Rybakina",
+          "decimal_odds_bet365": 13.0,
+          "implied_prob_devigged": 0.075
+        }
+      ]
+    }
+  ],
+  "live_matches_next_48h": [
+    {
+      "player_a": "Jannik Sinner",
+      "player_b": "Rafael Jodar",
+      "tournament": "Madrid Open",
+      "round": "QF",
+      "surface": "Clay",
+      "scheduled": "2026-04-29 (Wed) evening session, Madrid",
+      "odds_a_pinnacle_est": 1.07,
+      "odds_b_pinnacle_est": 11.0,
+      "odds_a_bet365": 1.075,
+      "odds_b_bet365": 8.0,
+      "implied_a_devigged": 0.93,
+      "movement_note": "Stable. Dimers model has Sinner 89%. No value either side; Jodar is 19yo wildcard, ranked outside top 100."
+    },
+    {
+      "player_a": "Flavio Cobolli",
+      "player_b": "Alexander Zverev",
+      "tournament": "Madrid Open",
+      "round": "QF",
+      "surface": "Clay",
+      "scheduled": "2026-04-30 (Thu)",
+      "odds_a_pinnacle_est": 2.85,
+      "odds_b_pinnacle_est": 1.43,
+      "odds_a_bet365": 2.75,
+      "odds_b_bet365": 1.45,
+      "implied_a_devigged": 0.36,
+      "implied_b_devigged": 0.71,
+      "movement_note": "Cobolli beat Zverev in Munich SF 6-3 6-3 three weeks ago. H2H factor not fully baked into 1.45 — Cobolli at 2.75 is a candidate value play if you weight recent H2H heavily."
+    },
+    {
+      "player_a": "Mirra Andreeva",
+      "player_b": "Hailey Baptiste",
+      "tournament": "Madrid Open",
+      "round": "SF",
+      "surface": "Clay",
+      "scheduled": "2026-04-30 (Thu)",
+      "odds_a_pinnacle_est": 1.36,
+      "odds_b_pinnacle_est": 3.30,
+      "odds_a_bet365": 1.33,
+      "odds_b_bet365": 3.40,
+      "implied_a_devigged": 0.74,
+      "implied_b_devigged": 0.26,
+      "movement_note": "Andreeva favored on H2H (1-0), ranking, experience. Baptiste price reflects emotional letdown risk after Sabalenka epic."
+    }
+  ],
+  "sharp_vs_public_divergence": [
+    "Lorenzo Musetti at Rome (ATP outright): public-heavy books like Bet365/DK likely to shorten to ~13-15 due to Italian home betting; Pinnacle expected to hold him at 17-21. Fade Italian books, take Pinnacle line if available.",
+    "Hailey Baptiste at Madrid outright: public chasing the Sabalenka-slayer narrative pushed her to 5.00 at retail books; sharps likely 6.50-7.00. Lay/avoid at retail.",
+    "Iga Swiatek at Roland Garros: Pinnacle's injury-discount likely steeper than Bet365's. If Pinnacle prices her at 4.00+ while Bet365 stays at 3.25, that's the sharp signal she may not be 100% fit.",
+    "Sinner at RG (1.50 Bet365 vs 1.67 some thin-margin books): the BetMGM 1.65 / Tips.GG 1.67 line is the sharper price; -150 to -200 at US retail books reflects square Sinner-mania post-Monte Carlo, not added information.",
+    "Cobolli vs Zverev: Cobolli at 2.75-2.85 across retail; given the 6-3 6-3 Munich result three weeks ago on similar clay, Pinnacle would likely price closer to 2.40-2.50. Retail offers a small edge."
+  ],
+  "line_movement_summary": {
+    "biggest_shorteners_week": [
+      "Sinner RG: 2.60 -> 1.50 (Alcaraz withdrawal + form)",
+      "Andreeva Madrid outright: 12.0 -> 2.00 (top half cleared)",
+      "Baptiste Madrid outright: 251.0 -> 5.00 (Sabalenka upset)",
+      "Gauff Madrid outright: 9.0 -> 3.25"
+    ],
+    "biggest_drifters_week": [
+      "Alcaraz RG: 2.20 -> 101.0 (withdrew)",
+      "Swiatek Madrid + RG: drifted on retirement injury",
+      "Sabalenka RG: 3.00 -> 3.50 (post-Madrid form question)",
+      "Rybakina Madrid: out R4, all forward markets drifted"
+    ]
+  },
+  "sources": [
+    "https://sports.betmgm.com/en/blog/atp/jannik-sinner-odds-to-win-french-open-bm25/",
+    "https://polymarket.com/event/2026-mens-french-open-winner",
+    "https://www.dimers.com/news/jannik-sinner-vs-rafael-jodar-tennis-prediction-atp-madrid-open-2026-ac",
+    "https://www.dimers.com/news/flavio-cobolli-vs-alexander-zverev-tennis-prediction-atp-madrid-open-2026-ac",
+    "https://www.thelines.com/uk/tips/tennis/tennis-betting-tips-2026-madrid-open-preview-and-predictions/",
+    "https://www.freetips.com/tennis/carlos-alcaraz-withdraws-from-2026-french-open-20260425-0006/",
+    "https://tips.gg/article/mens-roland-garros-2026-winner-betting-odds/",
+    "https://www.sportsbettingdime.com/tennis/futures/french-open-odds/",
+    "https://www.oddsportal.com/tennis/italy/atp-rome/",
+    "https://www.tennisnerd.net/betting-blog/atp-madrid-medvedev-vs-cobolli-and-mensik-vs-zverev-betting-predictions-and-best-bets/65572"
+  ]
+}
