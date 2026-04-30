@@ -7,12 +7,15 @@ when edge exceeds MIN_EDGE; tennis markets are tight so 3% is the floor.
 from __future__ import annotations
 
 import json
+import logging
 from dataclasses import dataclass
 from datetime import date, datetime
 
 from sqlalchemy import and_, or_, select
 
 from ..db import Bet, Match, Player, Prediction, init_db, session
+
+log = logging.getLogger(__name__)
 
 STARTING_BANKROLL = 1000.0
 KELLY_FRACTION = 0.25
