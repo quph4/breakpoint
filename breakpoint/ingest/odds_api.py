@@ -140,6 +140,19 @@ def active_tennis_sports() -> list[dict]:
     return [s for s in sports if s.get("group", "").lower() == "tennis" and s.get("active")]
 
 
+def fetch_scores_for_sport(sport_key: str, days_from: int = 3) -> list[dict]:
+    """Completed events with scores from the last `days_from` days.
+
+    Free tier: this endpoint costs 2 requests per call (more than /odds).
+    Cache for 30 min like everything else. Used by the settle fallback when
+    Sackmann hasn't published a result yet.
+    """
+    return _get(f"/sports/{sport_key}/scores", {
+        "daysFrom": str(days_from),
+        "dateFormat": "iso",
+    }, cache_key=f"scores_{sport_key}_{days_from}d") or []
+
+
 def _best_h2h_price(event: dict, player_name: str) -> tuple[float | None, str | None]:
     best, best_book = None, None
     for bm in event.get("bookmakers", []):

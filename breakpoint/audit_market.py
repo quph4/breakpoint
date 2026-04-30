@@ -189,7 +189,8 @@ def compute_market_audit(min_year: int = 2015, engine=None) -> dict | None:
     # eyeball them. If model_p, market_p, player names, and outcomes pass a
     # sniff test against historical sportsbook archives, the audit numbers
     # are real. If they look wrong, we've localized a bug.
-    samples = _sample_extreme_disagreement(df, p_model, engine=engine)
+    raw_model = model["booster"].predict_proba(df[FEATURES])[:, 1]
+    samples = _sample_extreme_disagreement(df, p_model, raw_model, engine=engine)
 
     return {
         "n": int(len(df)),
@@ -205,6 +206,7 @@ def compute_market_audit(min_year: int = 2015, engine=None) -> dict | None:
 
 
 def _sample_extreme_disagreement(df: pd.DataFrame, p_model: np.ndarray,
+                                  raw_p: np.ndarray | None = None,
                                   threshold: float = 0.20, n_per_side: int = 10,
                                   engine=None) -> list[dict]:
     """Pull the most disagreeable matches both ways.
@@ -217,6 +219,7 @@ def _sample_extreme_disagreement(df: pd.DataFrame, p_model: np.ndarray,
     engine = engine or init_db()
     df = df.assign(
         model_p=p_model,
+        raw_p=(raw_p if raw_p is not None else p_model),
         disagreement=p_model - df["market_p_a"].to_numpy(),
     )
     pos = df[df["disagreement"] >= threshold].sample(min(n_per_side, sum(df["disagreement"] >= threshold)),
@@ -258,6 +261,15 @@ def _sample_extreme_disagreement(df: pd.DataFrame, p_model: np.ndarray,
         else:
             a_id, b_id = meta.get("loser_id"), meta.get("winner_id")
 
+        # All 17 features for this row, rounded for readability
+        feature_dump = {}
+        for f in FEATURES:
+            v = row.get(f)
+            if v is None or (isinstance(v, float) and (v != v)):  # NaN check
+                feature_dump[f] = None
+            else:
+                feature_dump[f] = round(float(v), 4)
+
         out.append({
             "match_id": int(row["match_id"]),
             "date": meta.get("date"),
@@ -268,14 +280,13 @@ def _sample_extreme_disagreement(df: pd.DataFrame, p_model: np.ndarray,
             "player_a": names.get(a_id),
             "player_b": names.get(b_id),
             "model_p_a_wins": round(float(row["model_p"]), 4),
+            "raw_gbm_p_a_wins": round(float(row["raw_p"]), 4),
             "market_p_a_wins_devigged": round(float(row["market_p_a"]), 4),
             "disagreement": round(float(row["disagreement"]), 4),
             "actual_a_won": int(row["label"]),
             "odds_a": round(float(row["odds_a"]), 3),
             "odds_b": round(float(row["odds_b"]), 3),
-            "elo_diff": round(float(row.get("elo_diff", 0)), 1),
-            "elo_surf_diff": round(float(row.get("elo_surf_diff", 0)), 1),
-            "h2h_diff": round(float(row.get("h2h_diff", 0)), 3),
+            "features": feature_dump,
         })
     # Sort by absolute disagreement, biggest first
     out.sort(key=lambda r: abs(r["disagreement"]), reverse=True)

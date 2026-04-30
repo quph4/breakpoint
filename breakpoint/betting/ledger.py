@@ -134,12 +134,100 @@ def void_duplicate_bets(engine=None) -> int:
     return voided
 
 
+def _settle_against_match(bet: Bet, m: Match) -> None:
+    if m.winner_id == bet.pick_player_id:
+        bet.status = "won"
+        bet.pnl = round(bet.stake * (bet.odds - 1), 2)
+    else:
+        bet.status = "lost"
+        bet.pnl = -bet.stake
+    bet.settled_at = datetime.utcnow()
+
+
+def _settle_via_odds_api(s, open_bets: list) -> int:
+    """Look up completed events on The Odds API /scores and settle any open
+    bets we can identify by player names. Used when Sackmann hasn't published
+    a same-day result yet (his repo updates weekly during the season).
+    """
+    if not open_bets:
+        return 0
+    # Late import to avoid pulling requests in CLI startup.
+    from ..ingest.odds_api import active_tennis_sports, fetch_scores_for_sport
+    from ..name_resolver import resolve
+
+    sports = active_tennis_sports()
+    if not sports:
+        return 0
+
+    # Index open bets by (sorted player_id pair, date) for fast lookup
+    bet_index: dict[tuple[frozenset, "date"], list] = {}
+    for b in open_bets:
+        key = (frozenset({b.pick_player_id, b.opponent_id}), b.match_date)
+        bet_index.setdefault(key, []).append(b)
+
+    settled = 0
+    for sport in sports:
+        sport_key = sport["key"]
+        tour = "wta" if "wta" in sport_key.lower() else "atp"
+        for ev in fetch_scores_for_sport(sport_key, days_from=3):
+            if not ev.get("completed"):
+                continue
+            home, away = ev.get("home_team"), ev.get("away_team")
+            commence = ev.get("commence_time", "")
+            if not (home and away and commence):
+                continue
+            try:
+                ev_date = datetime.fromisoformat(commence.replace("Z", "+00:00")).date()
+            except ValueError:
+                continue
+            home_id = resolve(home, tour)
+            away_id = resolve(away, tour)
+            if not home_id or not away_id:
+                continue
+
+            # Determine winner from scores. /scores returns scores like
+            # [{"name": home, "score": "2"}, {"name": away, "score": "1"}].
+            scores = ev.get("scores") or []
+            home_score = next((sc.get("score") for sc in scores if sc.get("name") == home), None)
+            away_score = next((sc.get("score") for sc in scores if sc.get("name") == away), None)
+            try:
+                home_n = int(home_score)
+                away_n = int(away_score)
+            except (TypeError, ValueError):
+                continue
+            if home_n == away_n:
+                continue
+            winner_id = home_id if home_n > away_n else away_id
+
+            # Find any open bet matching this match (try both same-date and ±1 day)
+            for ddelta in (0, -1, 1):
+                from datetime import timedelta as _td
+                key = (frozenset({home_id, away_id}), ev_date + _td(days=ddelta))
+                for bet in bet_index.get(key, []):
+                    if bet.status != "open":
+                        continue
+                    # Synthesize a minimal Match-like to settle against
+                    class _M: pass
+                    m = _M()
+                    m.winner_id = winner_id
+                    _settle_against_match(bet, m)
+                    settled += 1
+    return settled
+
+
 def settle_bets(engine=None) -> int:
-    """Match open bets against historical results in `matches` table; mark won/lost."""
+    """Mark open bets won/lost.
+
+    Primary path: look up the result in our matches table (Sackmann data).
+    Fallback: when the matches table doesn't have it yet, hit The Odds API
+    /scores endpoint to settle from live results.
+    """
     engine = engine or init_db()
     settled = 0
     with session(engine) as s:
-        for bet in list(s.scalars(select(Bet).where(Bet.status == "open"))):
+        open_bets = list(s.scalars(select(Bet).where(Bet.status == "open")))
+        unsettled = []
+        for bet in open_bets:
             m = s.scalar(
                 select(Match).where(
                     Match.date == bet.match_date,
@@ -147,15 +235,12 @@ def settle_bets(engine=None) -> int:
                     ((Match.winner_id == bet.opponent_id) & (Match.loser_id == bet.pick_player_id))
                 )
             )
-            if not m:
-                continue
-            if m.winner_id == bet.pick_player_id:
-                bet.status = "won"
-                bet.pnl = round(bet.stake * (bet.odds - 1), 2)
+            if m:
+                _settle_against_match(bet, m)
+                settled += 1
             else:
-                bet.status = "lost"
-                bet.pnl = -bet.stake
-            bet.settled_at = datetime.utcnow()
-            settled += 1
+                unsettled.append(bet)
+        # Try the API fallback for anything still open
+        settled += _settle_via_odds_api(s, unsettled)
         s.commit()
     return settled
