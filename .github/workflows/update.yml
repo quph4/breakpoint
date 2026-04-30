@@ -90,6 +90,8 @@ jobs:
         continue-on-error: true
 
       - name: Settle open bets
+        env:
+          BREAKPOINT_ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
         run: breakpoint settle
 
       - name: Export JSON for dashboard
