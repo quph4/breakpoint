@@ -11,6 +11,15 @@ on:
         description: "Re-ingest tennis-data.co.uk closing odds for all years (one-shot, ignores year-skip)"
         type: boolean
         default: false
+      mark_bet_id:
+        description: "Bet ID to manually settle (leave blank to skip)"
+        type: string
+        default: ""
+      mark_bet_outcome:
+        description: "Outcome for the bet above"
+        type: choice
+        options: [won, lost, void]
+        default: won
 
 permissions:
   contents: write
@@ -92,6 +101,10 @@ jobs:
       - name: Void duplicate bets
         run: breakpoint void-duplicates
         continue-on-error: true
+
+      - name: Manual bet settle (workflow_dispatch only)
+        if: ${{ github.event.inputs.mark_bet_id != '' }}
+        run: breakpoint mark-bet ${{ github.event.inputs.mark_bet_id }} ${{ github.event.inputs.mark_bet_outcome }}
 
       - name: Settle open bets
         env:
