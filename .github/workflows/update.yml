@@ -75,6 +75,10 @@ jobs:
         run: breakpoint audit-market
         continue-on-error: true
 
+      - name: Training-data label stats (diagnostic)
+        run: breakpoint train-stats
+        continue-on-error: true
+
       - name: Sync fixtures + odds (The Odds API)
         env:
           BREAKPOINT_ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}

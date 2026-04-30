@@ -124,6 +124,23 @@ def ingest_historical_odds_cmd(start_year: int, end_year: int | None, refresh: b
     click.echo(f"Inserted {n} odds rows.")
 
 
+@cli.command("train-stats")
+def train_stats_cmd():
+    """Bucket training data label rate by feature value to detect label-feature misalignment."""
+    from .train_stats import write_stats
+    r = write_stats()
+    if "error" in r:
+        click.echo(r["error"]); return
+    click.echo(f"n_rows={r['n_rows']:,} | overall_label_rate={r['overall_label_rate']:.4f}")
+    click.echo("by elo_diff:")
+    for b in r["by_elo_diff"]:
+        if b["n"] == 0: continue
+        click.echo(f"  [{b['lo']}, {b['hi']}): n={b['n']:,} label_rate={b['label_rate']}")
+    j = r["joint_extreme"]
+    click.echo(f"all-features-negative: n={j['all_features_negative']['n']:,} label_rate={j['all_features_negative']['label_rate']}")
+    click.echo(f"all-features-positive: n={j['all_features_positive']['n']:,} label_rate={j['all_features_positive']['label_rate']}")
+
+
 @cli.command("audit-market")
 def audit_market_cmd():
     """Compare model predictions to closing-odds market on the test set."""
