@@ -120,7 +120,13 @@ def build_training_frame(engine=None, tour: str | None = None,
         surf = m.surface
 
         if m.date.year >= min_year:
-            flip = (hash((m.id, w, l)) & 1) == 1
+            # Player-identity-independent flip — m.id alone, no w/l in the
+            # hash. Earlier `hash((m.id, w, l))` correlated with player IDs
+            # via the tuple-hash mixing and let the model recover label info
+            # (raw GBM was hitting 78.7% on rows where every feature was
+            # negative for player_a, which the training distribution alone
+            # cannot explain).
+            flip = bool(m.id % 2)
             a, b = (l, w) if flip else (w, l)
             label = 0 if flip else 1
             ra, rb = elo[a], elo[b]
