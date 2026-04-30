@@ -151,9 +151,24 @@ def _settle_via_odds_api(s, open_bets: list) -> int:
     """Look up completed events on The Odds API /scores and settle any open
     bets we can identify by player names. Used when Sackmann hasn't published
     a same-day result yet (his repo updates weekly during the season).
+
+    The /scores endpoint costs 2 quota per call; quota is the binding
+    constraint on the free tier. So we only invoke it when we actually
+    have something to settle: an open bet whose match_date is within the
+    /scores window (today - 3 days to today). Older bets won't be in the
+    /scores response anyway, future-dated bets haven't happened yet.
     """
-    if not open_bets:
+    today = date.today()
+    settleable = [
+        b for b in open_bets
+        if b.match_date and (today - b.match_date).days >= 0
+                       and (today - b.match_date).days <= 3
+    ]
+    if not settleable:
+        log.info("scores fallback: no settleable bets in /scores window, skipping API call")
         return 0
+    open_bets = settleable
+
     # Late import to avoid pulling requests in CLI startup.
     from ..ingest.odds_api import active_tennis_sports, fetch_scores_for_sport
     from ..name_resolver import resolve
