@@ -35,7 +35,7 @@ import pandas as pd
 from sklearn.metrics import brier_score_loss, log_loss
 from sqlalchemy import select
 
-from .db import Match, Odds, init_db, session
+from .db import Match, Odds, Player, init_db, session
 from .features.build import build_training_frame
 from .models.baseline import FEATURES, MODEL_DIR, load_latest
 
@@ -185,6 +185,12 @@ def compute_market_audit(min_year: int = 2015, engine=None) -> dict | None:
             "roi": round(roi, 4) if roi is not None else None,
         })
 
+    # Sample 20 matches from the most-extreme-disagreement bucket so we can
+    # eyeball them. If model_p, market_p, player names, and outcomes pass a
+    # sniff test against historical sportsbook archives, the audit numbers
+    # are real. If they look wrong, we've localized a bug.
+    samples = _sample_extreme_disagreement(df, p_model, engine=engine)
+
     return {
         "n": int(len(df)),
         "date_min": df["date"].min().date().isoformat() if hasattr(df["date"].min(), "date") else str(df["date"].min()),
@@ -194,7 +200,86 @@ def compute_market_audit(min_year: int = 2015, engine=None) -> dict | None:
         "market": metrics(p_market),
         "disagreement_distribution": disagreement_buckets,
         "profit_simulation": profit_thresholds,
+        "samples_extreme_disagreement": samples,
     }
+
+
+def _sample_extreme_disagreement(df: pd.DataFrame, p_model: np.ndarray,
+                                  threshold: float = 0.20, n_per_side: int = 10,
+                                  engine=None) -> list[dict]:
+    """Pull the most disagreeable matches both ways.
+
+    Returns up to n_per_side rows where (model_p - market_p) >= +threshold AND
+    up to n_per_side where the disagreement runs the other way. Each entry has
+    enough context — names, date, surface, tournament, both probs, outcome,
+    a few key features — that we can spot-check against external sources.
+    """
+    engine = engine or init_db()
+    df = df.assign(
+        model_p=p_model,
+        disagreement=p_model - df["market_p_a"].to_numpy(),
+    )
+    pos = df[df["disagreement"] >= threshold].sample(min(n_per_side, sum(df["disagreement"] >= threshold)),
+                                                       random_state=42) if (df["disagreement"] >= threshold).any() else df.head(0)
+    neg = df[df["disagreement"] <= -threshold].sample(min(n_per_side, sum(df["disagreement"] <= -threshold)),
+                                                       random_state=42) if (df["disagreement"] <= -threshold).any() else df.head(0)
+
+    sample_rows = pd.concat([pos, neg]).reset_index(drop=True)
+    if sample_rows.empty:
+        return []
+
+    # Resolve player_a and player_b names. Need to recover them from the match.
+    # build_training_frame doesn't return player IDs, only match_id and label.
+    with session(engine) as s:
+        match_meta: dict[int, dict] = {}
+        for m in s.scalars(select(Match).where(Match.id.in_(sample_rows["match_id"].tolist()))):
+            match_meta[m.id] = {
+                "tour": m.tour,
+                "date": m.date.isoformat() if m.date else None,
+                "tourney": m.tourney_name,
+                "surface": m.surface,
+                "round": m.round,
+                "winner_id": m.winner_id,
+                "loser_id": m.loser_id,
+            }
+        # Pull player names for everyone we care about
+        all_pids = set()
+        for meta in match_meta.values():
+            if meta["winner_id"]: all_pids.add(meta["winner_id"])
+            if meta["loser_id"]: all_pids.add(meta["loser_id"])
+        names = dict(s.execute(select(Player.id, Player.name).where(Player.id.in_(all_pids))).all())
+
+    out = []
+    for _, row in sample_rows.iterrows():
+        meta = match_meta.get(row["match_id"], {})
+        # If label==1, player_a was the winner; else loser
+        if row["label"] == 1:
+            a_id, b_id = meta.get("winner_id"), meta.get("loser_id")
+        else:
+            a_id, b_id = meta.get("loser_id"), meta.get("winner_id")
+
+        out.append({
+            "match_id": int(row["match_id"]),
+            "date": meta.get("date"),
+            "tour": meta.get("tour"),
+            "tourney": meta.get("tourney"),
+            "round": meta.get("round"),
+            "surface": meta.get("surface"),
+            "player_a": names.get(a_id),
+            "player_b": names.get(b_id),
+            "model_p_a_wins": round(float(row["model_p"]), 4),
+            "market_p_a_wins_devigged": round(float(row["market_p_a"]), 4),
+            "disagreement": round(float(row["disagreement"]), 4),
+            "actual_a_won": int(row["label"]),
+            "odds_a": round(float(row["odds_a"]), 3),
+            "odds_b": round(float(row["odds_b"]), 3),
+            "elo_diff": round(float(row.get("elo_diff", 0)), 1),
+            "elo_surf_diff": round(float(row.get("elo_surf_diff", 0)), 1),
+            "h2h_diff": round(float(row.get("h2h_diff", 0)), 3),
+        })
+    # Sort by absolute disagreement, biggest first
+    out.sort(key=lambda r: abs(r["disagreement"]), reverse=True)
+    return out
 
 
 def write_market_audit() -> dict | None:
