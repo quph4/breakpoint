@@ -80,6 +80,24 @@ def run(engine=None) -> dict:
             fx = s.get(Fixture, fx_id)
             features = features_by_pred.get(pred_id, {})
             pick_is_a = (pred.edge_a or -1) >= (pred.edge_b or -1)
+
+            # Market-agreement gate: only bet when model and de-vigged
+            # market agree on which side wins. Rejects the cases where
+            # the model is in radical disagreement with sharp consensus,
+            # which historically correlates with model overconfidence
+            # rather than real edge.
+            inv_a = 1.0 / pred.odds_a
+            inv_b = 1.0 / pred.odds_b
+            market_p_a = inv_a / (inv_a + inv_b)
+            market_picks_a = market_p_a >= 0.5
+            if pick_is_a != market_picks_a:
+                fx.status = "predicted"
+                log.info("SKIP %s vs %s — model picks %s, market picks %s",
+                         pred.player_a_id, pred.player_b_id,
+                         "A" if pick_is_a else "B",
+                         "A" if market_picks_a else "B")
+                continue
+
             rationale = make_rationale(features, pick_is_a, pred.surface)
             placed = place_bet_from_prediction(pred, engine, rationale=rationale)
             if placed:

@@ -58,10 +58,17 @@ def train(df: pd.DataFrame, version: str | None = None) -> TrainReport:
     X_calib, y_calib = calib_df[FEATURES], calib_df["label"]
     X_test, y_test = test_df[FEATURES], test_df["label"]
 
+    # Smaller, more regularised model. The previous (num_leaves=63,
+    # min_child_samples=200, reg_lambda=1.0) version was calibrated on
+    # average but produced overconfident predictions on individual atypical
+    # rows — narrow conjunctions in deep trees would land in tiny leaves
+    # whose label rate didn't reflect the slice average. Coarser trees
+    # smooth over this and trade a bit of training-set fit for sane
+    # predictions on extreme inputs.
     booster = lgb.LGBMClassifier(
-        n_estimators=600, learning_rate=0.03, num_leaves=63,
-        min_child_samples=200, subsample=0.9, colsample_bytree=0.9,
-        reg_lambda=1.0, random_state=42, verbose=-1,
+        n_estimators=600, learning_rate=0.03, num_leaves=16,
+        min_child_samples=500, subsample=0.9, colsample_bytree=0.9,
+        reg_lambda=5.0, random_state=42, verbose=-1,
     )
     booster.fit(X_fit, y_fit, eval_set=[(X_calib, y_calib)], callbacks=[lgb.early_stopping(40, verbose=False)])
 
