@@ -100,6 +100,32 @@ def void_duplicates_cmd():
     click.echo(f"Voided {n} duplicate bets.")
 
 
+@cli.command("mark-bet")
+@click.argument("bet_id", type=int)
+@click.argument("outcome", type=click.Choice(["won", "lost", "void"]))
+def mark_bet_cmd(bet_id: int, outcome: str):
+    """Manually settle a bet by id. Use when automated settle can't (e.g. Sackmann lag)."""
+    from datetime import datetime
+    from .db import Bet, init_db, session
+    engine = init_db()
+    with session(engine) as s:
+        bet = s.get(Bet, bet_id)
+        if not bet:
+            click.echo(f"No bet with id={bet_id}"); return
+        if bet.status != "open":
+            click.echo(f"Bet {bet_id} already {bet.status}; refusing"); return
+        if outcome == "won":
+            bet.pnl = round(bet.stake * (bet.odds - 1), 2)
+        elif outcome == "lost":
+            bet.pnl = -bet.stake
+        else:
+            bet.pnl = 0
+        bet.status = outcome
+        bet.settled_at = datetime.utcnow()
+        s.commit()
+    click.echo(f"Marked bet {bet_id} as {outcome} (pnl={bet.pnl:+.2f})")
+
+
 @cli.command()
 def audit():
     """Build calibration audit JSON from the latest test split."""
