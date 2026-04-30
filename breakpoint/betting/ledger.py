@@ -166,14 +166,21 @@ def _settle_via_odds_api(s, open_bets: list) -> int:
         bet_index.setdefault(key, []).append(b)
 
     settled = 0
+    log.info("scores fallback: %d open bets to try", len(open_bets))
     for sport in sports:
         sport_key = sport["key"]
         tour = "wta" if "wta" in sport_key.lower() else "atp"
-        for ev in fetch_scores_for_sport(sport_key, days_from=3):
-            if not ev.get("completed"):
-                continue
+        events = fetch_scores_for_sport(sport_key, days_from=3)
+        log.info("scores [%s]: %d events", sport_key, len(events))
+        for ev in events:
             home, away = ev.get("home_team"), ev.get("away_team")
+            completed = ev.get("completed", False)
             commence = ev.get("commence_time", "")
+            scores = ev.get("scores") or []
+            log.info("  ev: %s vs %s | completed=%s | commence=%s | scores=%s",
+                     home, away, completed, commence, scores)
+            if not completed:
+                continue
             if not (home and away and commence):
                 continue
             try:
@@ -182,12 +189,10 @@ def _settle_via_odds_api(s, open_bets: list) -> int:
                 continue
             home_id = resolve(home, tour)
             away_id = resolve(away, tour)
+            log.info("    resolved: %s -> %s, %s -> %s", home, home_id, away, away_id)
             if not home_id or not away_id:
                 continue
 
-            # Determine winner from scores. /scores returns scores like
-            # [{"name": home, "score": "2"}, {"name": away, "score": "1"}].
-            scores = ev.get("scores") or []
             home_score = next((sc.get("score") for sc in scores if sc.get("name") == home), None)
             away_score = next((sc.get("score") for sc in scores if sc.get("name") == away), None)
             try:
@@ -199,18 +204,18 @@ def _settle_via_odds_api(s, open_bets: list) -> int:
                 continue
             winner_id = home_id if home_n > away_n else away_id
 
-            # Find any open bet matching this match (try both same-date and ±1 day)
+            from datetime import timedelta as _td
             for ddelta in (0, -1, 1):
-                from datetime import timedelta as _td
                 key = (frozenset({home_id, away_id}), ev_date + _td(days=ddelta))
                 for bet in bet_index.get(key, []):
                     if bet.status != "open":
                         continue
-                    # Synthesize a minimal Match-like to settle against
                     class _M: pass
                     m = _M()
                     m.winner_id = winner_id
                     _settle_against_match(bet, m)
+                    log.info("    SETTLED bet %s (pick=%s) against winner=%s",
+                             bet.id, bet.pick_player_id, winner_id)
                     settled += 1
     return settled
 
