@@ -30,6 +30,7 @@ def _write(name: str, payload) -> None:
 
 
 def export_summary(engine=None) -> dict:
+    from .clv import compute_clv
     engine = engine or init_db()
     with session(engine) as s:
         total = s.scalar(select(func.count(Bet.id))) or 0
@@ -38,6 +39,18 @@ def export_summary(engine=None) -> dict:
         open_ = s.scalar(select(func.count(Bet.id)).where(Bet.status == "open")) or 0
         staked = s.scalar(select(func.sum(Bet.stake)).where(Bet.status.in_(["won", "lost"]))) or 0
         pnl = s.scalar(select(func.sum(Bet.pnl)).where(Bet.status.in_(["won", "lost"]))) or 0
+
+        # Aggregate CLV across settled bets that have a closing-line snapshot
+        clv_bets = list(s.scalars(
+            select(Bet).where(
+                Bet.status.in_(["won", "lost"]),
+                Bet.closing_odds_pick.is_not(None),
+                Bet.closing_odds_opp.is_not(None),
+            )
+        ))
+    clvs = [compute_clv(b.odds, b.closing_odds_pick, b.closing_odds_opp) for b in clv_bets]
+    clvs = [c for c in clvs if c is not None]
+    avg_clv = round(sum(clvs) / len(clvs), 4) if clvs else None
 
     settled = won + lost
     payload = {
@@ -51,12 +64,15 @@ def export_summary(engine=None) -> dict:
         "win_rate": round(won / settled, 4) if settled else None,
         "roi": round(pnl / staked, 4) if staked else None,
         "total_pnl": round(pnl, 2),
+        "avg_clv": avg_clv,
+        "n_clv_bets": len(clvs),
     }
     _write("summary.json", payload)
     return payload
 
 
 def export_bets(engine=None, limit_settled: int = 500) -> None:
+    from .clv import compute_clv
     engine = engine or init_db()
     with session(engine) as s:
         rows = []
@@ -67,6 +83,7 @@ def export_bets(engine=None, limit_settled: int = 500) -> None:
                 rationale = json.loads(b.rationale) if b.rationale else []
             except (TypeError, ValueError):
                 rationale = []
+            clv = compute_clv(b.odds, b.closing_odds_pick, b.closing_odds_opp)
             rows.append({
                 "id": b.id,
                 "placed_at": b.placed_at,
@@ -80,6 +97,9 @@ def export_bets(engine=None, limit_settled: int = 500) -> None:
                 "model_p": b.model_p, "edge": b.edge,
                 "status": b.status, "pnl": b.pnl,
                 "rationale": rationale,
+                "closing_odds_pick": b.closing_odds_pick,
+                "closing_odds_opp": b.closing_odds_opp,
+                "clv": round(clv, 4) if clv is not None else None,
             })
     open_bets = [r for r in rows if r["status"] == "open"]
     settled = [r for r in rows if r["status"] != "open"][:limit_settled]

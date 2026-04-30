@@ -98,6 +98,10 @@ jobs:
         run: breakpoint predict
         continue-on-error: true
 
+      - name: Refresh closing-line snapshots (CLV)
+        run: breakpoint update-clv
+        continue-on-error: true
+
       - name: Void duplicate bets
         run: breakpoint void-duplicates
         continue-on-error: true

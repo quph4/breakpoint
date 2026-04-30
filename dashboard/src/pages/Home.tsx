@@ -36,7 +36,7 @@ export default function Home() {
         </p>
       </section>
 
-      <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <section className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <div className="card">
           <div className="stat-label">Bankroll</div>
           <div className={`stat ${profitColor}`}>{fmtMoney(s.bankroll)}</div>
@@ -52,6 +52,15 @@ export default function Home() {
         <div className="card">
           <div className="stat-label">Win rate</div>
           <div className="stat">{fmtPct(s.win_rate)}</div>
+        </div>
+        <div className="card">
+          <div className="stat-label">Avg CLV</div>
+          <div className={`stat ${(s.avg_clv ?? 0) >= 0 ? "text-court" : "text-clay"}`}>
+            {fmtPct(s.avg_clv ?? null, true)}
+          </div>
+          <div className="text-xs text-ink/50 mt-1">
+            n={s.n_clv_bets ?? 0} settled bets w/ closing line
+          </div>
         </div>
       </section>
 

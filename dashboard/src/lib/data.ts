@@ -12,6 +12,8 @@ export type Summary = {
   win_rate: number | null;
   roi: number | null;
   total_pnl: number;
+  avg_clv?: number | null;
+  n_clv_bets?: number;
 };
 
 export type Bet = {
@@ -30,6 +32,9 @@ export type Bet = {
   status: "open" | "won" | "lost" | "void";
   pnl: number | null;
   rationale?: string[];
+  closing_odds_pick?: number | null;
+  closing_odds_opp?: number | null;
+  clv?: number | null;
 };
 
 export type Player = {

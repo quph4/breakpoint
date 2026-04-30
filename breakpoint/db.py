@@ -154,6 +154,12 @@ class Bet(Base):
     pnl = Column(Float)  # +stake*(odds-1) on win, -stake on loss, 0 on void
     settled_at = Column(DateTime)
     rationale = Column(String)  # JSON-encoded list of short reason strings
+    # Closing-line snapshot — refreshed each cron tick while the bet is open;
+    # the last snapshot before the match is no longer in /odds approximates
+    # the true closing line, the standard reference for measuring edge.
+    closing_odds_pick = Column(Float)
+    closing_odds_opp = Column(Float)
+    closing_fetched_at = Column(DateTime)
 
 
 def get_engine(path: Path | str | None = None):
@@ -173,7 +179,11 @@ def _migrate(engine) -> None:
         existing_cols = {r[1] for r in conn.exec_driver_sql("PRAGMA table_info(bets)")}
         if existing_cols and "rationale" not in existing_cols:
             conn.exec_driver_sql("ALTER TABLE bets ADD COLUMN rationale VARCHAR")
-            conn.commit()
+        if existing_cols and "closing_odds_pick" not in existing_cols:
+            conn.exec_driver_sql("ALTER TABLE bets ADD COLUMN closing_odds_pick FLOAT")
+            conn.exec_driver_sql("ALTER TABLE bets ADD COLUMN closing_odds_opp FLOAT")
+            conn.exec_driver_sql("ALTER TABLE bets ADD COLUMN closing_fetched_at DATETIME")
+        conn.commit()
 
 
 def init_db(engine=None):

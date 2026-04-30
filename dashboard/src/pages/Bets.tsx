@@ -38,6 +38,13 @@ function Row({ b }: { b: Bet }) {
       <td className="py-2 pr-4 text-right tabular-nums">{(b.model_p * 100).toFixed(1)}%</td>
       <td className="py-2 pr-4 text-right tabular-nums text-court">+{(b.edge * 100).toFixed(1)}%</td>
       <td className="py-2 pr-4 text-right tabular-nums">${b.stake.toFixed(2)}</td>
+      <td className="py-2 pr-4 text-right tabular-nums">
+        {b.clv == null ? "—" : (
+          <span className={b.clv >= 0 ? "text-court" : "text-clay"}>
+            {b.clv >= 0 ? "+" : ""}{(b.clv * 100).toFixed(1)}%
+          </span>
+        )}
+      </td>
       <td className="py-2 pr-4"><StatusPill b={b} /></td>
     </tr>
   );
@@ -103,6 +110,7 @@ export default function Bets() {
                 <th className="py-2 pr-4 text-right">Model P</th>
                 <th className="py-2 pr-4 text-right">Edge</th>
                 <th className="py-2 pr-4 text-right">Stake</th>
+                <th className="py-2 pr-4 text-right">CLV</th>
                 <th className="py-2 pr-4">Status</th>
               </tr>
             </thead>

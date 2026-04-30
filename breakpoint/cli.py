@@ -84,6 +84,14 @@ def predict_cmd():
     click.echo(f"Predictions: {r['predictions']} | Bets placed: {r['bets']} | Skipped: {r['skipped']}")
 
 
+@cli.command("update-clv")
+def update_clv_cmd():
+    """Refresh closing-line snapshots on open bets."""
+    from .clv import update_closing_lines
+    n = update_closing_lines()
+    click.echo(f"Refreshed closing odds on {n} open bets.")
+
+
 @cli.command()
 def settle():
     """Settle open bets against historical results."""
