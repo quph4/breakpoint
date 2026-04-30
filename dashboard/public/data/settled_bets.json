@@ -14,7 +14,10 @@
     "edge": 0.5291219512195122,
     "status": "void",
     "pnl": 0.0,
-    "rationale": []
+    "rationale": [],
+    "closing_odds_pick": null,
+    "closing_odds_opp": null,
+    "clv": null
   },
   {
     "id": 2,
@@ -31,7 +34,10 @@
     "edge": 0.5291219512195122,
     "status": "void",
     "pnl": 0.0,
-    "rationale": []
+    "rationale": [],
+    "closing_odds_pick": null,
+    "closing_odds_opp": null,
+    "clv": null
   },
   {
     "id": 1,
@@ -48,6 +54,9 @@
     "edge": 0.5291219512195122,
     "status": "won",
     "pnl": 31.0,
-    "rationale": []
+    "rationale": [],
+    "closing_odds_pick": null,
+    "closing_odds_opp": null,
+    "clv": null
   }
 ]

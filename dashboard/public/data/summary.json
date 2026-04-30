@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-30T09:22:30.233029",
+  "updated_at": "2026-04-30T09:52:40.380610",
   "starting_bankroll": 1000.0,
   "bankroll": 1031.0,
   "total_bets": 3,
@@ -8,5 +8,7 @@
   "lost": 0,
   "win_rate": 1.0,
   "roi": 0.62,
-  "total_pnl": 31.0
+  "total_pnl": 31.0,
+  "avg_clv": null,
+  "n_clv_bets": 0
 }
