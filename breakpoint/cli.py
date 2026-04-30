@@ -108,6 +108,7 @@ def mark_bet_cmd(bet_id: int, outcome: str):
     from datetime import datetime
     from .db import Bet, init_db, session
     engine = init_db()
+    pnl: float | None = None
     with session(engine) as s:
         bet = s.get(Bet, bet_id)
         if not bet:
@@ -115,15 +116,16 @@ def mark_bet_cmd(bet_id: int, outcome: str):
         if bet.status != "open":
             click.echo(f"Bet {bet_id} already {bet.status}; refusing"); return
         if outcome == "won":
-            bet.pnl = round(bet.stake * (bet.odds - 1), 2)
+            pnl = round(bet.stake * (bet.odds - 1), 2)
         elif outcome == "lost":
-            bet.pnl = -bet.stake
+            pnl = -bet.stake
         else:
-            bet.pnl = 0
+            pnl = 0
+        bet.pnl = pnl
         bet.status = outcome
         bet.settled_at = datetime.utcnow()
         s.commit()
-    click.echo(f"Marked bet {bet_id} as {outcome} (pnl={bet.pnl:+.2f})")
+    click.echo(f"Marked bet {bet_id} as {outcome} (pnl={pnl:+.2f})")
 
 
 @cli.command()
