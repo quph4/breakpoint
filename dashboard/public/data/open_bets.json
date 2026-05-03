@@ -1,1 +1,25 @@
-[]
+[
+  {
+    "id": 4,
+    "placed_at": "2026-05-03T00:50:21.799769",
+    "match_date": "2026-05-03",
+    "pick": "Jannik Sinner",
+    "opponent": "Alexander Zverev",
+    "tour": "atp",
+    "surface": "Clay",
+    "tourney": "ATP Madrid Open",
+    "stake": 51.55,
+    "odds": 1.23,
+    "model_p": 0.9649122807017544,
+    "edge": 0.18684210526315792,
+    "status": "open",
+    "pnl": null,
+    "rationale": [
+      "Overall Elo +234",
+      "Return pts +3.2%"
+    ],
+    "closing_odds_pick": 1.23,
+    "closing_odds_opp": 5.7,
+    "clv": 0.0117
+  }
+]
